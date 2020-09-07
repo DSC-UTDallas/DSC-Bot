@@ -23,15 +23,16 @@ require("firebase/firestore");
 firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
 
-client.on("message", (msg) => {
+client.on("message", async (msg) => {
   const message = msg.content.toLowerCase();
+  const dsc = msg.guild.emojis.cache.find((emoji) => emoji.name === "dsc");
 
   if (message.startsWith("!help")) {
     commands = [
-      "!help: To get the list of commands",
-      "!ideas: To see the list of ideas for next meeting agenda",
-      "!addIdea <idea>: To add an idea for next meeting agenda",
-      "!removeIdea <idea>: To remove the idea from next meeting agenda",
+      `${dsc} !help: To get the list of commands`,
+      `${dsc} !ideas: To see the list of ideas for next meeting agenda`,
+      `${dsc} !addIdea <idea>: To add an idea for next meeting agenda`,
+      `${dsc} !removeIdea <idea>: To remove the idea from next meeting agenda`,
     ];
     msg.channel.send(
       "These are the commands you can use (not case-sensitive):"
@@ -57,6 +58,30 @@ client.on("message", (msg) => {
         console.error("Error adding document: ", error);
       });
   }
+
+  if (message.startsWith("!ideas")) {
+    agenda = await getAgenda(dsc);
+
+    //msg.channel.send("These are the agenda items for next meeting: ");
+    const embed = new Discord.MessageEmbed()
+      .setTitle("Agenda Ideas for Next Meeting")
+      .setColor(0x2b85d3)
+      .setDescription(agenda);
+    msg.channel.send(embed);
+  }
 });
+
+async function getAgenda(dsc) {
+  var agenda = [];
+  await db
+    .collection("DSC UTD")
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        agenda.push(`${dsc} ` + doc.data().agendaIdea);
+      });
+    });
+  return agenda;
+}
 
 client.login(process.env.DISCORD_TOKEN);
