@@ -47,16 +47,7 @@ client.on("message", async (msg) => {
   if (message.startsWith("!addidea")) {
     const idea = message.substr(message.indexOf(" ") + 1);
     msg.channel.send(idea + " added to list");
-    db.collection("DSC UTD")
-      .add({
-        agendaIdea: idea,
-      })
-      .then(function (docRef) {
-        console.log("Document written with ID: ", docRef.id);
-      })
-      .catch(function (error) {
-        console.error("Error adding document: ", error);
-      });
+    await addIdea(idea);
   }
 
   if (message.startsWith("!ideas")) {
@@ -69,6 +60,12 @@ client.on("message", async (msg) => {
       .setDescription(agenda);
     msg.channel.send(embed);
   }
+
+  if (message.startsWith("!removeidea")) {
+    const idea = message.substr(message.indexOf(" ") + 1);
+    await deleteIdea(idea);
+    msg.channel.send(idea + " deleated from agenda");
+  }
 });
 
 async function getAgenda(dsc) {
@@ -78,10 +75,39 @@ async function getAgenda(dsc) {
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
+        console.log(doc.data().agendaIdea);
         agenda.push(`${dsc} ` + doc.data().agendaIdea);
       });
     });
   return agenda;
+}
+
+async function addIdea(idea) {
+  await db
+    .collection("DSC UTD")
+    .doc(idea)
+    .set({
+      agendaIdea: idea,
+    })
+    .then(function (docRef) {
+      console.log("Document written");
+    })
+    .catch(function (error) {
+      console.error("Error adding document: ", error);
+    });
+}
+
+async function deleteIdea(idea) {
+  await db
+    .collection("DSC UTD")
+    .doc(idea)
+    .delete()
+    .then(function () {
+      console.log("Document successfully deleted!");
+    })
+    .catch(function (error) {
+      console.error("Error removing document: ", error);
+    });
 }
 
 client.login(process.env.DISCORD_TOKEN);
