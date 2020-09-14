@@ -46,8 +46,8 @@ client.on("message", async (msg) => {
 
   if (message.startsWith("!addidea")) {
     const idea = message.substr(message.indexOf(" ") + 1);
-    msg.channel.send(idea + " added to list");
     await addIdea(idea);
+    msg.delete({ timeout: 1000 });
   }
 
   if (message.startsWith("!ideas")) {
@@ -64,7 +64,7 @@ client.on("message", async (msg) => {
   if (message.startsWith("!removeidea")) {
     const idea = message.substr(message.indexOf(" ") + 1);
     await deleteIdea(idea);
-    msg.channel.send(idea + " deleated from agenda");
+    msg.delete({ timeout: 1000 });
   }
 });
 
