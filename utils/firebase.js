@@ -14,14 +14,14 @@ require("firebase/firestore");
 firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
 
-exports.GETagenda = async (dsc) => {
+exports.GETagenda = async (emoji) => {
   var agenda = [];
   await db
     .collection("DSC UTD")
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        agenda.push(`${dsc} ` + doc.data().agendaIdea);
+        agenda.push(`${emoji} ` + doc.data().agendaIdea);
       });
     });
   return agenda;
