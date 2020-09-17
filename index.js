@@ -1,8 +1,10 @@
 require("dotenv").config();
-const { sendRulesReaction } = require("./commands/react-role");
+const { sendRulesReaction, addRole } = require("./commands/react-role");
 
 const Discord = require("discord.js");
-const client = new Discord.Client();
+const client = new Discord.Client({
+  partials: ["MESSAGE", "CHANNEL", "REACTION"],
+});
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -71,6 +73,10 @@ client.on("message", async (msg) => {
   if (message.startsWith("!rules")) {
     sendRulesReaction(msg);
   }
+});
+
+client.on("messageReactionAdd", async (reaction, user) => {
+  addRole();
 });
 
 async function getAgenda(dsc) {

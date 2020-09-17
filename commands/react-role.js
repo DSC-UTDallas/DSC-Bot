@@ -23,3 +23,7 @@ exports.sendRulesReaction = async (msg) => {
 
   msg.delete({ timeout: 1000 });
 };
+
+exports.addRole = async (reaction, user) => {
+  console.log("adding reaction");
+};
