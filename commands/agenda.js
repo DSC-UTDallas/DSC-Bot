@@ -9,11 +9,14 @@ exports.sendCommands = (msg, emoji) => {
     `${emoji} !removeIdea <idea>: To remove the idea from next meeting agenda`,
   ];
   msg.channel.send("These are the commands you can use (not case-sensitive):");
+
   const embed = new Discord.MessageEmbed()
     .setTitle("Command List")
     .setColor(0x2b85d3)
     .setDescription(commands);
   msg.channel.send(embed);
+
+  msg.delete({ timeout: 1000 });
 };
 
 exports.addIdea = async (msg, idea) => {
@@ -30,6 +33,8 @@ exports.getIdeas = async (msg, emoji) => {
     .setColor(0x2b85d3)
     .setDescription(agenda);
   msg.channel.send(embed);
+
+  msg.delete({ timeout: 1000 });
 };
 
 exports.deleteIdea = async (msg, idea) => {
