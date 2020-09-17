@@ -1,4 +1,5 @@
 require("dotenv").config();
+const { sendRulesReaction } = require("./commands/react-role");
 
 const Discord = require("discord.js");
 const client = new Discord.Client();
@@ -65,6 +66,10 @@ client.on("message", async (msg) => {
     const idea = message.substr(message.indexOf(" ") + 1);
     await deleteIdea(idea);
     msg.delete({ timeout: 1000 });
+  }
+
+  if (message.startsWith("!rules")) {
+    sendRulesReaction(msg, dsc);
   }
 });
 
