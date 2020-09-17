@@ -76,7 +76,7 @@ client.on("message", async (msg) => {
 });
 
 client.on("messageReactionAdd", async (reaction, user) => {
-  addRole();
+  addRole(reaction, user);
 });
 
 async function getAgenda(dsc) {

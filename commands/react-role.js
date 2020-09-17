@@ -2,6 +2,9 @@ const Discord = require("discord.js");
 const fs = require("fs");
 const path = require("path");
 
+//TODO: Figure how to reference from name instead of id
+const memberRoleID = "756046335832096789";
+
 exports.sendRulesReaction = async (msg) => {
   const text = fs.readFileSync(path.resolve(__dirname, "../rules.txt"), "utf8");
   const rules = text.split("\n");
@@ -25,5 +28,16 @@ exports.sendRulesReaction = async (msg) => {
 };
 
 exports.addRole = async (reaction, user) => {
-  console.log("adding reaction");
+  if (reaction.message.partial) await reaction.message.fetch();
+  if (reaction.partial) await reaction.fetch();
+  if (user.bot) return;
+  if (!reaction.message.guild) return;
+
+  if (reaction.message.channel.name === "rules") {
+    if (reaction.emoji.name === "👍") {
+      await reaction.message.guild.members.cache
+        .get(user.id)
+        .roles.add(memberRoleID);
+    }
+  }
 };
