@@ -69,7 +69,7 @@ client.on("message", async (msg) => {
   }
 
   if (message.startsWith("!rules")) {
-    sendRulesReaction(msg, dsc);
+    sendRulesReaction(msg);
   }
 });
 
