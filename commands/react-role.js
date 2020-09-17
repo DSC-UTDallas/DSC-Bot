@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 
 //TODO: Figure how to reference from name instead of id
-const memberRoleID = "756046335832096789";
+const memberRoleID = "756049478330613801";
 
 exports.sendRulesReaction = async (msg) => {
   const text = fs.readFileSync(path.resolve(__dirname, "../rules.txt"), "utf8");
