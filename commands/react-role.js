@@ -2,19 +2,18 @@ const Discord = require("discord.js");
 const fs = require("fs");
 const path = require("path");
 
-//TODO: Figure how to reference from name instead of id
-const memberRoleID = "756046335832096789";
+const memberRoleID = "756049478330613801";
 
 exports.sendRulesReaction = async (msg) => {
   const text = fs.readFileSync(path.resolve(__dirname, "../rules.txt"), "utf8");
   const rules = text.split("\n");
 
-  const agreement = [rules[rules.length - 1]];
+  const agreement = rules.slice(16, 23);
 
   const embedRules = new Discord.MessageEmbed()
     .setTitle("Community Guidelines and Rules")
     .setColor(0x2b85d3)
-    .setDescription(rules.slice(0, 17));
+    .setDescription(rules.slice(0, 15));
   msg.channel.send(embedRules);
 
   const embedAgreement = new Discord.MessageEmbed()
