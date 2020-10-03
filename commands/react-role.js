@@ -1,0 +1,42 @@
+const Discord = require("discord.js");
+const fs = require("fs");
+const path = require("path");
+
+const memberRoleID = "756049478330613801";
+
+exports.sendRulesReaction = async (msg) => {
+  const text = fs.readFileSync(path.resolve(__dirname, "../rules.txt"), "utf8");
+  const rules = text.split("\n");
+
+  const agreement = rules.slice(16, 23);
+
+  const embedRules = new Discord.MessageEmbed()
+    .setTitle("Community Guidelines and Rules")
+    .setColor(0x2b85d3)
+    .setDescription(rules.slice(0, 15));
+  msg.channel.send(embedRules);
+
+  const embedAgreement = new Discord.MessageEmbed()
+    .setTitle("Agreement to Community Guidelines and Rules")
+    .setColor(0x2b85d3)
+    .setDescription(agreement);
+  let agreementMsg = await msg.channel.send(embedAgreement);
+  agreementMsg.react("👍");
+
+  msg.delete({ timeout: 1000 });
+};
+
+exports.addRole = async (reaction, user) => {
+  if (reaction.message.partial) await reaction.message.fetch();
+  if (reaction.partial) await reaction.fetch();
+  if (user.bot) return;
+  if (!reaction.message.guild) return;
+
+  if (reaction.message.channel.name === "rules") {
+    if (reaction.emoji.name === "👍") {
+      await reaction.message.guild.members.cache
+        .get(user.id)
+        .roles.add(memberRoleID);
+    }
+  }
+};
