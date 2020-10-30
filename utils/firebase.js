@@ -28,11 +28,13 @@ exports.GETagenda = async (emoji) => {
 };
 
 exports.POSTidea = async (idea) => {
+  var index = Math.floor(Math.random() * 99);
+
   await db
     .collection("DSC UTD")
-    .doc(idea)
+    .doc(index.toString())
     .set({
-      agendaIdea: idea,
+      agendaIdea: index.toString() + " - " + idea,
     })
     .then(function (docRef) {
       console.log("Document written");
