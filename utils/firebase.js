@@ -44,10 +44,10 @@ exports.POSTidea = async (idea) => {
     });
 };
 
-exports.DELETEidea = async (idea) => {
+exports.DELETEidea = async (index) => {
   await db
     .collection("DSC UTD")
-    .doc(idea)
+    .doc(index.toString())
     .delete()
     .then(function () {
       console.log("Document successfully deleted!");
