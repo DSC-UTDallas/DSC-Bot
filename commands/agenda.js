@@ -4,9 +4,9 @@ const { POSTidea, GETagenda, DELETEidea } = require("../utils/firebase");
 exports.sendCommands = (msg, emoji) => {
   commands = [
     `${emoji} !help: To get the list of commands`,
-    `${emoji} !ideas: To see the list of ideas for next meeting agenda`,
-    `${emoji} !addIdea <idea>: To add an idea for next meeting agenda`,
-    `${emoji} !removeIdea <idea>: To remove the idea from next meeting agenda`,
+    `${emoji} !ideas: To see the list of ideas and their indexes for next meeting agenda`,
+    `${emoji} !addIdea <idea>: To add an idea for next meeting agenda (each idea will get assigned a random index)`,
+    `${emoji} !removeIdea <idea-index>: To remove the idea from next meeting agenda`,
   ];
   msg.channel.send("These are the commands you can use (not case-sensitive):");
 
