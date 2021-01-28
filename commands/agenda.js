@@ -29,7 +29,7 @@ exports.sendCommands = (msg, emoji) => {
 
 exports.addIdea = async (msg, idea) => {
   POSTidea(idea);
-  msg.delete({ timeout: 1000 });
+  msg.react("👍");
 };
 
 exports.getIdeas = async (msg, emoji) => {
@@ -47,5 +47,5 @@ exports.getIdeas = async (msg, emoji) => {
 
 exports.deleteIdea = async (msg, idea) => {
   DELETEidea(idea);
-  msg.delete({ timeout: 1000 });
+  msg.react("👍");
 };

@@ -3,7 +3,7 @@ const { POSTtodo, GETtodo, DELETEtodo } = require("../utils/firebase");
 
 exports.addTodo = async (msg, idea) => {
   POSTtodo(idea);
-  msg.delete({ timeout: 1000 });
+  msg.react("👍");
 };
 
 exports.getTodo = async (msg, team, emoji) => {
@@ -21,5 +21,5 @@ exports.getTodo = async (msg, team, emoji) => {
 
 exports.deleteTodo = async (msg, idea) => {
   DELETEtodo(idea);
-  msg.delete({ timeout: 1000 });
+  msg.react("👍");
 };
