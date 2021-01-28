@@ -4,13 +4,18 @@ const { POSTidea, GETagenda, DELETEidea } = require("../utils/firebase");
 exports.sendCommands = (msg, emoji) => {
   commands = [
     `${emoji} !help: To get the list of commands`,
-    `${emoji} !ideas: To see the list of ideas and their indexes for next meeting agenda`,
-    `${emoji} !addIdea <idea>: To add an idea for next meeting agenda (each idea will get assigned a random index)`,
-    `${emoji} !removeIdea <idea-index>: To remove the idea from next meeting agenda`,
     `${emoji} !todo <role>: To see the list of todo and their indexes for your team`,
     `${emoji} !addTodo <role> <idea>: To add an idea for your team (each idea will get assigned a random index)`,
     `${emoji} !removeTodo <role> <idea-index>: To remove the idea from your team`,
   ];
+  if (msg.member.roles.cache.find((r) => r.name === "Officers")) {
+    officerCommands = [
+      `${emoji} !ideas: To see the list of ideas and their indexes for next meeting agenda`,
+      `${emoji} !addIdea <idea>: To add an idea for next meeting agenda (each idea will get assigned a random index)`,
+      `${emoji} !removeIdea <idea-index>: To remove the idea from next meeting agenda`,
+    ];
+    commands = commands.concat(officerCommands);
+  }
   msg.channel.send("These are the commands you can use (not case-sensitive):");
 
   const embed = new Discord.MessageEmbed()
