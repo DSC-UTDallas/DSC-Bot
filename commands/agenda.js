@@ -4,9 +4,9 @@ const { POSTidea, GETagenda, DELETEidea } = require("../utils/firebase");
 exports.sendCommands = (msg, emoji) => {
   commands = [
     `${emoji} !help: To get the list of commands`,
-    `${emoji} !todo <role (lowercase)>: To see the list of todo and their indexes for your team`,
-    `${emoji} !addTodo <role (lowercase)> <idea>: To add an idea for your team (each idea will get assigned a random index)`,
-    `${emoji} !removeTodo <role (lowercase)> <idea-index>: To remove the idea from your team`,
+    `${emoji} !todo <role>: To see the list of todo and their indexes for your team`,
+    `${emoji} !addTodo <role> <idea>: To add an idea for your team (each idea will get assigned a random index)`,
+    `${emoji} !removeTodo <role> <idea-index>: To remove the idea from your team`,
   ];
   if (msg.member.roles.cache.find((r) => r.name === "Officers")) {
     officerCommands = [
