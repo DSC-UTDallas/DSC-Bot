@@ -82,7 +82,6 @@ client.on("message", async (msg) => {
     sendRulesReaction(msg);
   }
 
-  // message <channel> <msg>
   if (message.startsWith("!message")) {
     const messageDetails = message.substr(message.indexOf(" ") + 1);
     console.log(messageDetails);

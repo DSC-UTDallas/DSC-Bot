@@ -1,5 +1,3 @@
-const Discord = require("discord.js");
-
 exports.sendMessage = async (msg, client, channelID, message) => {
   client.channels.cache.get(channelID).send(message);
   msg.react("👍");
