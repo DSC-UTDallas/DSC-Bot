@@ -1,12 +1,9 @@
 require("dotenv").config();
 const { sendRulesReaction, addRole } = require("./commands/react-role");
-const {
-  sendCommands,
-  addIdea,
-  getIdeas,
-  deleteIdea,
-} = require("./commands/agenda");
+const { addIdea, getIdeas, deleteIdea } = require("./commands/agenda");
 const { addTodo, getTodo, deleteTodo } = require("./commands/todo");
+const { sendMessage, sendDM } = require("./commands/message");
+const { sendCommands } = require("./commands/help");
 const Discord = require("discord.js");
 const client = new Discord.Client({
   partials: ["MESSAGE", "CHANNEL", "REACTION"],
@@ -18,9 +15,9 @@ client.on("ready", () => {
 
 client.on("message", async (msg) => {
   const message = msg.content.toLowerCase();
-  const dsc = msg.guild.emojis.cache.find((emoji) => emoji.name === "dsc");
 
   if (message.startsWith("!help")) {
+    const dsc = msg.guild.emojis.cache.find((emoji) => emoji.name === "dsc");
     sendCommands(msg, dsc);
   }
 
@@ -44,6 +41,7 @@ client.on("message", async (msg) => {
   }
 
   if (message.startsWith("!ideas")) {
+    const dsc = msg.guild.emojis.cache.find((emoji) => emoji.name === "dsc");
     if (msg.member.roles.cache.find((r) => r.name === "Officers")) {
       getIdeas(msg, dsc);
     } else {
@@ -52,6 +50,7 @@ client.on("message", async (msg) => {
   }
 
   if (message.startsWith("!todo")) {
+    const dsc = msg.guild.emojis.cache.find((emoji) => emoji.name === "dsc");
     const team = message.substr(message.indexOf(" ") + 1);
     if (msg.member.roles.cache.some((r) => r.name.toLowerCase() === team)) {
       getTodo(msg, team, dsc);
@@ -83,6 +82,25 @@ client.on("message", async (msg) => {
     sendRulesReaction(msg);
   }
 
+  if (message.startsWith("!message")) {
+    const messageDetails = message.substr(message.indexOf(" ") + 1);
+    console.log(messageDetails);
+    const channelID = messageDetails.substr(0, messageDetails.indexOf(" "));
+    const messageContent = messageDetails.substr(
+      messageDetails.indexOf(" ") + 1
+    );
+    sendMessage(msg, client, channelID, messageContent);
+  }
+
+  if (message.startsWith("!dm")) {
+    const messageDetails = message.substr(message.indexOf(" ") + 1);
+    console.log(messageDetails);
+    const userID = messageDetails.substr(0, messageDetails.indexOf(" "));
+    const messageContent = messageDetails.substr(
+      messageDetails.indexOf(" ") + 1
+    );
+    sendDM(msg, client, userID, messageContent);
+  }
   //HIDDEN COMMANDS
   if (message.startsWith("!pizza")) {
     msg.react("🍕");
