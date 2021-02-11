@@ -13,7 +13,7 @@ exports.sendCommands = (msg, emoji) => {
       `${emoji} !addIdea <idea>: To add an idea for next meeting agenda (each idea will get assigned a random index)`,
       `${emoji} !removeIdea <idea-index>: To remove the idea from next meeting agenda`,
       `${emoji} !message <channelID> <message>: To send a message to a channel`,
-      `${emoji} !dm <userID> <message>: To send a dm to a user`,
+      // `${emoji} !dm <userID> <message>: To send a dm to a user`,
     ];
     commands = commands.concat(officerCommands);
   }
