@@ -1,13 +1,9 @@
 require("dotenv").config();
 const { sendRulesReaction, addRole } = require("./commands/react-role");
-const {
-  sendCommands,
-  addIdea,
-  getIdeas,
-  deleteIdea,
-} = require("./commands/agenda");
+const { addIdea, getIdeas, deleteIdea } = require("./commands/agenda");
 const { addTodo, getTodo, deleteTodo } = require("./commands/todo");
 const { sendMessage, sendDM } = require("./commands/message");
+const { sendCommands } = require("./commands/help");
 const Discord = require("discord.js");
 const client = new Discord.Client({
   partials: ["MESSAGE", "CHANNEL", "REACTION"],
