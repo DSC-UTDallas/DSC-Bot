@@ -84,7 +84,6 @@ client.on("message", async (msg) => {
 
   if (message.startsWith("!message")) {
     const messageDetails = msg.content.substr(message.indexOf(" ") + 1);
-    console.log(messageDetails);
     const channelID = messageDetails.substr(0, messageDetails.indexOf(" "));
     const messageContent = messageDetails.substr(
       messageDetails.indexOf(" ") + 1
@@ -94,7 +93,6 @@ client.on("message", async (msg) => {
 
   if (message.startsWith("!dm")) {
     const messageDetails = msg.content.substr(message.indexOf(" ") + 1);
-    console.log(messageDetails);
     const userID = messageDetails.substr(0, messageDetails.indexOf(" "));
     const messageContent = messageDetails.substr(
       messageDetails.indexOf(" ") + 1
