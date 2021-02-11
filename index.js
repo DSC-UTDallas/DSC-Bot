@@ -101,6 +101,20 @@ client.on("message", async (msg) => {
     );
     sendDM(msg, client, userID, messageContent);
   }
+  //HIDDEN COMMANDS
+  if (message.startsWith("!pizza")) {
+    msg.react("🍕");
+  }
+
+  if (message.startsWith("!barsha")) {
+    msg.react("🅱️");
+    content = message.substr(message.indexOf(" ") + 1);
+    content = content.split(" ");
+    content.forEach(function (part, index, content) {
+      content[index] = "🅱️" + content[index].substring(1);
+    });
+    msg.channel.send(content.slice(0, content.length).join(" "));
+  }
 });
 
 client.on("messageReactionAdd", async (reaction, user) => {
