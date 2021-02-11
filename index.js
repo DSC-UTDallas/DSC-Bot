@@ -7,6 +7,7 @@ const {
   deleteIdea,
 } = require("./commands/agenda");
 const { addTodo, getTodo, deleteTodo } = require("./commands/todo");
+const { sendMessage } = require("./commands/message");
 const Discord = require("discord.js");
 const client = new Discord.Client({
   partials: ["MESSAGE", "CHANNEL", "REACTION"],
@@ -81,6 +82,17 @@ client.on("message", async (msg) => {
 
   if (message.startsWith("!rules")) {
     sendRulesReaction(msg);
+  }
+
+  // message <channel> <msg>
+  if (message.startsWith("!message")) {
+    const messageDetails = message.substr(message.indexOf(" ") + 1);
+    console.log(messageDetails);
+    const channelID = messageDetails.substr(0, messageDetails.indexOf(" "));
+    const messageContent = messageDetails.substr(
+      messageDetails.indexOf(" ") + 1
+    );
+    sendMessage(client, channelID, messageContent);
   }
 });
 
