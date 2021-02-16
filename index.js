@@ -3,6 +3,7 @@ const { sendRulesReaction, addRole } = require("./commands/react-role");
 const { addIdea, getIdeas, deleteIdea } = require("./commands/agenda");
 const { addTodo, getTodo, deleteTodo } = require("./commands/todo");
 const { sendMessage, sendDM } = require("./commands/message");
+const { setStream, stopStream } = require("./commands/stream");
 const { sendCommands } = require("./commands/help");
 const Discord = require("discord.js");
 const client = new Discord.Client({
@@ -100,6 +101,15 @@ client.on("message", async (msg) => {
     );
     sendDM(msg, client, userID, messageContent);
   }
+
+  if (message.startsWith("!stream")) {
+    setStream(client, msg);
+  }
+
+  if (message.startsWith("!stopstream")) {
+    stopStream(client, msg);
+  }
+
   //HIDDEN COMMANDS
   if (message.startsWith("!pizza")) {
     msg.react("🍕");
