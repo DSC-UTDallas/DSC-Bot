@@ -24,7 +24,7 @@ client.on("message", async (msg) => {
 
   if (message.startsWith("!addidea")) {
     if (msg.member.roles.cache.find((r) => r.name === "Officers")) {
-      addIdea(msg, idea);
+      addIdea(msg);
     } else {
       msg.reply("Access denied to command");
     }
@@ -41,9 +41,8 @@ client.on("message", async (msg) => {
   }
 
   if (message.startsWith("!ideas")) {
-    const dsc = msg.guild.emojis.cache.find((emoji) => emoji.name === "dsc");
     if (msg.member.roles.cache.find((r) => r.name === "Officers")) {
-      getIdeas(msg, dsc);
+      getIdeas(msg);
     } else {
       msg.reply("Access denied to command");
     }
@@ -61,8 +60,7 @@ client.on("message", async (msg) => {
 
   if (message.startsWith("!removeidea")) {
     if (msg.member.roles.cache.find((r) => r.name === "Officers")) {
-      const idea = message.substr(message.indexOf(" ") + 1);
-      deleteIdea(msg, idea);
+      deleteIdea(msg);
     } else {
       msg.reply("Access denied to command");
     }
