@@ -19,13 +19,11 @@ client.on("message", async (msg) => {
   const message = msg.content.toLowerCase();
 
   if (message.startsWith("!help")) {
-    const dsc = msg.guild.emojis.cache.find((emoji) => emoji.name === "dsc");
-    sendCommands(msg, dsc);
+    sendCommands(msg);
   }
 
   if (message.startsWith("!addidea")) {
     if (msg.member.roles.cache.find((r) => r.name === "Officers")) {
-      const idea = message.substr(message.indexOf(" ") + 1);
       addIdea(msg, idea);
     } else {
       msg.reply("Access denied to command");

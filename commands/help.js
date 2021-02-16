@@ -1,9 +1,11 @@
 const Discord = require("discord.js");
 
-exports.sendCommands = (msg, emoji) => {
+exports.sendCommands = (msg) => {
+  const emoji = msg.guild.emojis.cache.find((emoji) => emoji.name === "dsc");
+
   commands = [
     `${emoji} !help: To get the list of commands`,
-    `${emoji} !todo <role (lowercase)>: To see the list of todo and their indexes for your team`,
+    `${emoji} !todo <role>: To see the list of todo and their indexes for your team`,
     `${emoji} !addTodo <role> <idea>: To add an idea for your team (each idea will get assigned a random index)`,
     `${emoji} !removeTodo <role> <idea-index>: To remove the idea from your team`,
   ];
@@ -16,7 +18,7 @@ exports.sendCommands = (msg, emoji) => {
       `${emoji} !message <channelID> <message>: To send a message to a channel`,
       // `${emoji} !dm <userID> <message>: To send a dm to a user`,
       `${emoji} !setStream <stream-link> <event-name>: Sets activity to - playing event and shows Twitch link if available`,
-      `${emoji} !stopStream: Sets activity - to listening to !help`,
+      `${emoji} !stopStream: Sets activity to - listening to !help`,
     ];
     commands = commands.concat(officerCommands);
   }
