@@ -33,6 +33,7 @@ client.on("message", async (msg) => {
   if (message.startsWith("!addtodo")) {
     const messageDetails = message.substr(message.indexOf(" ") + 1);
     const team = messageDetails.split(" ")[0];
+
     if (msg.member.roles.cache.some((r) => r.name.toLowerCase() === team)) {
       addTodo(msg, messageDetails);
     } else {
@@ -51,6 +52,7 @@ client.on("message", async (msg) => {
   if (message.startsWith("!todo")) {
     const dsc = msg.guild.emojis.cache.find((emoji) => emoji.name === "dsc");
     const team = message.substr(message.indexOf(" ") + 1);
+
     if (msg.member.roles.cache.some((r) => r.name.toLowerCase() === team)) {
       getTodo(msg, team, dsc);
     } else {
@@ -69,6 +71,7 @@ client.on("message", async (msg) => {
   if (message.startsWith("!removetodo")) {
     const messageDetails = message.substr(message.indexOf(" ") + 1);
     const team = messageDetails.split(" ")[0];
+
     if (msg.member.roles.cache.some((r) => r.name.toLowerCase() === team)) {
       deleteTodo(msg, messageDetails);
     } else {
@@ -81,21 +84,19 @@ client.on("message", async (msg) => {
   }
 
   if (message.startsWith("!message")) {
-    const messageDetails = msg.content.substr(message.indexOf(" ") + 1);
-    const channelID = messageDetails.substr(0, messageDetails.indexOf(" "));
-    const messageContent = messageDetails.substr(
-      messageDetails.indexOf(" ") + 1
-    );
-    sendMessage(msg, client, channelID, messageContent);
+    if (msg.member.roles.cache.find((r) => r.name === "Officers")) {
+      sendMessage(msg, client);
+    } else {
+      msg.reply("Access denied to command");
+    }
   }
 
   if (message.startsWith("!dm")) {
-    const messageDetails = msg.content.substr(message.indexOf(" ") + 1);
-    const userID = messageDetails.substr(0, messageDetails.indexOf(" "));
-    const messageContent = messageDetails.substr(
-      messageDetails.indexOf(" ") + 1
-    );
-    sendDM(msg, client, userID, messageContent);
+    if (msg.member.roles.cache.find((r) => r.name === "Officers")) {
+      sendDM(msg, client);
+    } else {
+      msg.reply("Access denied to command");
+    }
   }
 
   if (message.startsWith("!stream")) {
