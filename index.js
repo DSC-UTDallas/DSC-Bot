@@ -28,12 +28,7 @@ client.on("message", async (msg) => {
   if (message.startsWith("!addtodo")) {
     const messageDetails = message.substr(message.indexOf(" ") + 1);
     const team = messageDetails.split(" ")[0];
-
-    if (msg.member.roles.cache.some((r) => r.name.toLowerCase() === team)) {
-      addTodo(msg, messageDetails);
-    } else {
-      msg.reply("Access denied to command");
-    }
+    if (checkPermissions(msg, team)) addTodo(msg, messageDetails);
   }
 
   if (message.startsWith("!ideas")) {
@@ -42,12 +37,7 @@ client.on("message", async (msg) => {
 
   if (message.startsWith("!todo")) {
     const team = message.substr(message.indexOf(" ") + 1);
-
-    if (msg.member.roles.cache.some((r) => r.name.toLowerCase() === team)) {
-      getTodo(msg, team);
-    } else {
-      msg.reply("Access denied to command");
-    }
+    if (checkPermissions(msg, team)) getTodo(msg, team);
   }
 
   if (message.startsWith("!removeidea")) {
@@ -57,12 +47,7 @@ client.on("message", async (msg) => {
   if (message.startsWith("!removetodo")) {
     const messageDetails = message.substr(message.indexOf(" ") + 1);
     const team = messageDetails.split(" ")[0];
-
-    if (msg.member.roles.cache.some((r) => r.name.toLowerCase() === team)) {
-      deleteTodo(msg, messageDetails);
-    } else {
-      msg.reply("Access denied to command");
-    }
+    if (checkPermissions(msg, team)) deleteTodo(msg, messageDetails);
   }
 
   if (message.startsWith("!rules")) {
