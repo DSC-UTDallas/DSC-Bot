@@ -83,6 +83,7 @@ client.on("message", async (msg) => {
       content[index] = "🅱️" + content[index].substring(1);
     });
     msg.channel.send(content.slice(0, content.length).join(" "));
+    msg.delete({ timeout: 1000 });
   }
 });
 
