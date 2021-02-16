@@ -50,11 +50,10 @@ client.on("message", async (msg) => {
   }
 
   if (message.startsWith("!todo")) {
-    const dsc = msg.guild.emojis.cache.find((emoji) => emoji.name === "dsc");
     const team = message.substr(message.indexOf(" ") + 1);
 
     if (msg.member.roles.cache.some((r) => r.name.toLowerCase() === team)) {
-      getTodo(msg, team, dsc);
+      getTodo(msg, team);
     } else {
       msg.reply("Access denied to command");
     }

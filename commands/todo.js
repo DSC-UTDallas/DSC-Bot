@@ -6,7 +6,8 @@ exports.addTodo = async (msg, idea) => {
   msg.react("👍");
 };
 
-exports.getTodo = async (msg, team, emoji) => {
+exports.getTodo = async (msg, team) => {
+  const emoji = msg.guild.emojis.cache.find((emoji) => emoji.name === "dsc");
   agenda = await GETtodo(team, emoji);
 
   //msg.channel.send("These are the agenda items for next meeting: ");
