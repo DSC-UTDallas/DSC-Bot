@@ -1,4 +1,5 @@
 require("dotenv").config();
+const { checkPermissions } = require("./utils/permissions");
 const { sendRulesReaction, addRole } = require("./commands/react-role");
 const { addIdea, getIdeas, deleteIdea } = require("./commands/agenda");
 const { addTodo, getTodo, deleteTodo } = require("./commands/todo");
@@ -18,16 +19,10 @@ client.on("ready", () => {
 client.on("message", async (msg) => {
   const message = msg.content.toLowerCase();
 
-  if (message.startsWith("!help")) {
-    sendCommands(msg);
-  }
+  if (message.startsWith("!help")) sendCommands(msg);
 
   if (message.startsWith("!addidea")) {
-    if (msg.member.roles.cache.find((r) => r.name === "Officers")) {
-      addIdea(msg);
-    } else {
-      msg.reply("Access denied to command");
-    }
+    if (checkPermissions(msg, "Officers")) addIdea(msg);
   }
 
   if (message.startsWith("!addtodo")) {
@@ -42,11 +37,7 @@ client.on("message", async (msg) => {
   }
 
   if (message.startsWith("!ideas")) {
-    if (msg.member.roles.cache.find((r) => r.name === "Officers")) {
-      getIdeas(msg);
-    } else {
-      msg.reply("Access denied to command");
-    }
+    if (checkPermissions(msg, "Officers")) getIdeas(msg);
   }
 
   if (message.startsWith("!todo")) {
@@ -60,11 +51,7 @@ client.on("message", async (msg) => {
   }
 
   if (message.startsWith("!removeidea")) {
-    if (msg.member.roles.cache.find((r) => r.name === "Officers")) {
-      deleteIdea(msg);
-    } else {
-      msg.reply("Access denied to command");
-    }
+    if (checkPermissions(msg, "Officers")) deleteIdea(msg);
   }
 
   if (message.startsWith("!removetodo")) {
@@ -79,31 +66,23 @@ client.on("message", async (msg) => {
   }
 
   if (message.startsWith("!rules")) {
-    sendRulesReaction(msg);
+    if (checkPermissions(msg, "Officers")) sendRulesReaction(msg);
   }
 
   if (message.startsWith("!message")) {
-    if (msg.member.roles.cache.find((r) => r.name === "Officers")) {
-      sendMessage(msg, client);
-    } else {
-      msg.reply("Access denied to command");
-    }
+    if (checkPermissions(msg, "Officers")) sendMessage(msg, client);
   }
 
   if (message.startsWith("!dm")) {
-    if (msg.member.roles.cache.find((r) => r.name === "Officers")) {
-      sendDM(msg, client);
-    } else {
-      msg.reply("Access denied to command");
-    }
+    if (checkPermissions(msg, "Officers")) sendDM(msg, client);
   }
 
   if (message.startsWith("!stream")) {
-    setStream(client, msg);
+    if (checkPermissions(msg, "Officers")) setStream(client, msg);
   }
 
   if (message.startsWith("!stopstream")) {
-    stopStream(client, msg);
+    if (checkPermissions(msg, "Officers")) stopStream(client, msg);
   }
 
   //HIDDEN COMMANDS
