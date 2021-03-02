@@ -1,5 +1,4 @@
 require("dotenv").config();
-const { checkPermissions } = require("./utils/permissions");
 const { sendRulesReaction, addRole } = require("./commands/react-role");
 const { addIdea, getIdeas, deleteIdea } = require("./commands/agenda");
 const { addTodo, getTodo, deleteTodo } = require("./commands/todo");
