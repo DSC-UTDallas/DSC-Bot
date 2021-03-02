@@ -1,6 +1,8 @@
 const Discord = require("discord.js");
 
-exports.sendCommands = (msg, emoji) => {
+exports.sendCommands = (msg) => {
+  const emoji = msg.guild.emojis.cache.find((emoji) => emoji.name === "dsc");
+
   commands = [
     `${emoji} !help: To get the list of commands`,
     `${emoji} !todo <role>: To see the list of todo and their indexes for your team`,

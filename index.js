@@ -18,16 +18,11 @@ client.on("ready", () => {
 client.on("message", async (msg) => {
   const message = msg.content.toLowerCase();
 
-  if (message.startsWith("!help")) {
-    const dsc = msg.guild.emojis.cache.find((emoji) => emoji.name === "dsc");
-    sendCommands(msg, dsc);
-  }
+  if (message.startsWith("!help")) sendCommands(msg);
 
   if (message.startsWith("!addidea")) {
-    if (msg.member.roles.cache.find((r) => r.name === "Officers")) {
-      const idea = message.substr(message.indexOf(" ") + 1);
-      addIdea(msg, idea);
-    } else {
+    if (msg.member.roles.cache.find((r) => r.name === "Officers")) addIdea(msg);
+    else {
       msg.reply("Access denied to command");
     }
   }
@@ -44,29 +39,23 @@ client.on("message", async (msg) => {
   }
 
   if (message.startsWith("!ideas")) {
-    if (msg.member.roles.cache.find((r) => r.name === "Officers")) {
+    if (msg.member.roles.cache.find((r) => r.name === "Officers"))
       getIdeas(msg);
-    } else {
-      msg.reply("Access denied to command");
-    }
+    else msg.reply("Access denied to command");
   }
 
   if (message.startsWith("!todo")) {
     const team = message.substr(message.indexOf(" ") + 1);
 
-    if (msg.member.roles.cache.some((r) => r.name.toLowerCase() === team)) {
+    if (msg.member.roles.cache.some((r) => r.name.toLowerCase() === team))
       getTodo(msg, team);
-    } else {
-      msg.reply("Access denied to command");
-    }
+    else msg.reply("Access denied to command");
   }
 
   if (message.startsWith("!removeidea")) {
-    if (msg.member.roles.cache.find((r) => r.name === "Officers")) {
+    if (msg.member.roles.cache.find((r) => r.name === "Officers"))
       deleteIdea(msg);
-    } else {
-      msg.reply("Access denied to command");
-    }
+    else msg.reply("Access denied to command");
   }
 
   if (message.startsWith("!removetodo")) {
@@ -81,35 +70,27 @@ client.on("message", async (msg) => {
   }
 
   if (message.startsWith("!rules")) {
-    if (msg.member.roles.cache.find((r) => r.name === "Officers")) {
+    if (msg.member.roles.cache.find((r) => r.name === "Officers"))
       sendRulesReaction(msg);
-    } else {
-      msg.reply("Access denied to command");
-    }
+    else msg.reply("Access denied to command");
   }
 
   if (message.startsWith("!message")) {
-    if (msg.member.roles.cache.find((r) => r.name === "Officers")) {
+    if (msg.member.roles.cache.find((r) => r.name === "Officers"))
       sendMessage(msg, client);
-    } else {
-      msg.reply("Access denied to command");
-    }
+    else msg.reply("Access denied to command");
   }
 
   if (message.startsWith("!stream")) {
-    if (msg.member.roles.cache.find((r) => r.name === "Officers")) {
+    if (msg.member.roles.cache.find((r) => r.name === "Officers"))
       setStream(client, msg);
-    } else {
-      msg.reply("Access denied to command");
-    }
+    else msg.reply("Access denied to command");
   }
 
   if (message.startsWith("!stopstream")) {
-    if (msg.member.roles.cache.find((r) => r.name === "Officers")) {
+    if (msg.member.roles.cache.find((r) => r.name === "Officers"))
       stopStream(client, msg);
-    } else {
-      msg.reply("Access denied to command");
-    }
+    else msg.reply("Access denied to command");
   }
 
   //HIDDEN COMMANDS
