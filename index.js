@@ -45,7 +45,11 @@ client.on("message", async (msg) => {
   }
 
   if (message.startsWith("!ideas")) {
-    if (checkPermissions(msg, "Officers")) getIdeas(msg);
+    if (msg.member.roles.cache.find((r) => r.name === "Officers")) {
+      getIdeas(msg);
+    } else {
+      msg.reply("Access denied to command");
+    }
   }
 
   if (message.startsWith("!todo")) {
@@ -59,7 +63,11 @@ client.on("message", async (msg) => {
   }
 
   if (message.startsWith("!removeidea")) {
-    if (checkPermissions(msg, "Officers")) deleteIdea(msg);
+    if (msg.member.roles.cache.find((r) => r.name === "Officers")) {
+      deleteIdea(msg);
+    } else {
+      msg.reply("Access denied to command");
+    }
   }
 
   if (message.startsWith("!removetodo")) {
@@ -74,23 +82,35 @@ client.on("message", async (msg) => {
   }
 
   if (message.startsWith("!rules")) {
-    if (checkPermissions(msg, "Officers")) sendRulesReaction(msg);
+    if (msg.member.roles.cache.find((r) => r.name === "Officers")) {
+      sendRulesReaction(msg);
+    } else {
+      msg.reply("Access denied to command");
+    }
   }
 
   if (message.startsWith("!message")) {
-    if (checkPermissions(msg, "Officers")) sendMessage(msg, client);
-  }
-
-  if (message.startsWith("!dm")) {
-    if (checkPermissions(msg, "Officers")) sendDM(msg, client);
+    if (msg.member.roles.cache.find((r) => r.name === "Officers")) {
+      sendMessage(msg, client);
+    } else {
+      msg.reply("Access denied to command");
+    }
   }
 
   if (message.startsWith("!stream")) {
-    if (checkPermissions(msg, "Officers")) setStream(client, msg);
+    if (msg.member.roles.cache.find((r) => r.name === "Officers")) {
+      setStream(client, msg);
+    } else {
+      msg.reply("Access denied to command");
+    }
   }
 
   if (message.startsWith("!stopstream")) {
-    if (checkPermissions(msg, "Officers")) stopStream(client, msg);
+    if (msg.member.roles.cache.find((r) => r.name === "Officers")) {
+      stopStream(client, msg);
+    } else {
+      msg.reply("Access denied to command");
+    }
   }
 
   //HIDDEN COMMANDS
