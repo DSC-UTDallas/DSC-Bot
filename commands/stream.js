@@ -12,7 +12,7 @@ exports.setStream = async (client, msg) => {
   msg.react("👍");
 };
 
-exports.stopStream = async (client, msg) => {
+exports.stopStream = async (msg, client) => {
   client.user.setActivity("!help", { type: "LISTENING" });
   msg.react("👍");
 };
