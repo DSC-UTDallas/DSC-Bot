@@ -60,8 +60,6 @@ exports.POSTidea = async (idea) => {
 exports.POSTtodo = async (team, idea) => {
   var index = Math.floor(Math.random() * 99);
 
-  console.log(team);
-
   await db
     .collection(team)
     .doc(index.toString())
