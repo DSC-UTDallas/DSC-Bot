@@ -57,9 +57,7 @@ exports.POSTidea = async (idea) => {
     });
 };
 
-exports.POSTtodo = async (messageDetails) => {
-  const team = messageDetails.substr(0, messageDetails.indexOf(" "));
-  const idea = messageDetails.substr(messageDetails.indexOf(" ") + 1);
+exports.POSTtodo = async (team, idea) => {
   var index = Math.floor(Math.random() * 99);
 
   console.log(team);
@@ -91,10 +89,7 @@ exports.DELETEidea = async (index) => {
     });
 };
 
-exports.DELETEtodo = async (messageDetails) => {
-  const team = messageDetails.substr(0, messageDetails.indexOf(" "));
-  const idea = messageDetails.substr(messageDetails.indexOf(" ") + 1);
-
+exports.DELETEtodo = async (team, idea) => {
   await db
     .collection(team)
     .doc(idea.toString())

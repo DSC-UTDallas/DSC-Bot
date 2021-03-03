@@ -83,7 +83,7 @@ client.on("message", async (msg) => {
 
   if (message.startsWith("!stream")) {
     if (msg.member.roles.cache.find((r) => r.name === "Officers"))
-      setStream(client, msg);
+      setStream(msg, client);
     else msg.reply("Access denied to command");
   }
 
