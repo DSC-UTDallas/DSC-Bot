@@ -1,4 +1,4 @@
-exports.setStream = async (client, msg) => {
+exports.setStream = async (msg, client) => {
   message = msg.content.substr(msg.content.indexOf(" ") + 1);
   stream = message.substr(0, message.indexOf(" "));
   eventName = message.substr(message.indexOf(" ") + 1);
