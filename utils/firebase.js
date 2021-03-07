@@ -47,7 +47,7 @@ exports.POSTidea = async (idea) => {
     .collection("DSC UTD")
     .doc(index.toString())
     .set({
-      agendaIdea: index.toString() + " - " + idea,
+      agendaIdea: idea,
     })
     .then(function (docRef) {
       console.log("Document written");
@@ -68,7 +68,7 @@ exports.POSTtodo = async (messageDetails) => {
     .collection(team)
     .doc(index.toString())
     .set({
-      todo: index.toString() + " - " + idea,
+      todo: idea,
     })
     .then(function (docRef) {
       console.log("Document written");
