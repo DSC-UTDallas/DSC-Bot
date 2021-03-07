@@ -21,7 +21,7 @@ exports.GETagenda = async (emoji) => {
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        agenda.push(`${emoji} ` + doc.data().agendaIdea);
+        agenda.push(`${emoji} ` + doc.id + " - " + doc.data().agendaIdea);
       });
     });
   return agenda;
@@ -34,7 +34,7 @@ exports.GETtodo = async (team, emoji) => {
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        agenda.push(`${emoji} ` + doc.data().todo);
+        agenda.push(`${emoji} ` + doc.id + " - " + doc.data().todo);
       });
     });
   return agenda;
