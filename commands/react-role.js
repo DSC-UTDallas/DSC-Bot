@@ -39,6 +39,9 @@ exports.addRole = async (reaction, user) => {
         await reaction.message.guild.members.cache
           .get(user.id)
           .roles.add(memberRoleID);
+        loggerInfo(
+          user.username + "#" + user.discriminator + " was given role Member"
+        );
       } catch (e) {
         loggerError(
           user.username +
