@@ -1,6 +1,10 @@
 // Imports the Google Cloud client library for Bunyan
 const bunyan = require("bunyan");
 const { LoggingBunyan } = require("@google-cloud/logging-bunyan");
+const Discord = require("discord.js");
+const client = new Discord.Client({
+  partials: ["MESSAGE", "CHANNEL", "REACTION"],
+});
 
 // Creates a client
 const loggingBunyan = new LoggingBunyan({
@@ -15,7 +19,7 @@ const logger = bunyan.createLogger({
   name: process.env.loggingBucket,
   streams: [
     // Log to the console at 'info' and above
-    { stream: process.stdout, level: "info" },
+    //{ stream: process.stdout, level: "info" },
     // And log to Cloud Logging, logging at 'info' and above
     loggingBunyan.stream("info"),
   ],
