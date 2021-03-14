@@ -1,4 +1,5 @@
 require("dotenv").config();
+const { loggerInfo, loggerError } = require("./utils/logging.js");
 const { checkPermissions } = require("./utils/permissions");
 const { sendRulesReaction, addRole } = require("./commands/react-role");
 const { addIdea, getIdeas, deleteIdea } = require("./commands/agenda");
@@ -62,7 +63,7 @@ client.on("message", async (msg) => {
     if (checkPermissions(msg, "Officers")) sendDM(msg, client);
   }
 
-  if (message.startsWith("!stream")) {
+  if (message.startsWith("!setstream")) {
     if (checkPermissions(msg, "Officers")) setStream(client, msg);
   }
 
@@ -72,7 +73,13 @@ client.on("message", async (msg) => {
 
   //HIDDEN COMMANDS
   if (message.startsWith("!pizza")) {
-    msg.react("🍕");
+    const author = msg.author.username + "#" + msg.author.discriminator;
+    try {
+      msg.react("🍕");
+      loggerInfo(author + " requested pizza");
+    } catch (e) {
+      loggerError(author + " could not request pizza ;-;", e);
+    }
   }
 
   if (message.startsWith("!barsha")) {
@@ -88,7 +95,14 @@ client.on("message", async (msg) => {
 });
 
 client.on("messageReactionAdd", async (reaction, user) => {
-  addRole(reaction, user);
+  try {
+    addRole(reaction, user);
+  } catch (e) {
+    loggerError(
+      user.username + "#" + user.discriminator + " was not given role Member",
+      e
+    );
+  }
 });
 
 client.login(process.env.DISCORD_TOKEN);

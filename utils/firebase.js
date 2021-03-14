@@ -50,19 +50,15 @@ exports.POSTidea = async (idea) => {
       agendaIdea: idea,
     })
     .then(function (docRef) {
-      console.log("Document written");
+      //console.log("Document written");
     })
     .catch(function (error) {
-      console.error("Error adding document: ", error);
+      //console.error("Error adding document: ", error);
     });
 };
 
-exports.POSTtodo = async (messageDetails) => {
-  const team = messageDetails.substr(0, messageDetails.indexOf(" "));
-  const idea = messageDetails.substr(messageDetails.indexOf(" ") + 1);
+exports.POSTtodo = async (team, idea) => {
   var index = Math.floor(Math.random() * 99);
-
-  console.log(team);
 
   await db
     .collection(team)
@@ -71,10 +67,10 @@ exports.POSTtodo = async (messageDetails) => {
       todo: idea,
     })
     .then(function (docRef) {
-      console.log("Document written");
+      //console.log("Document written");
     })
     .catch(function (error) {
-      console.error("Error adding document: ", error);
+      //console.error("Error adding document: ", error);
     });
 };
 
@@ -84,25 +80,22 @@ exports.DELETEidea = async (index) => {
     .doc(index.toString())
     .delete()
     .then(function () {
-      console.log("Document successfully deleted!");
+      //console.log("Document successfully deleted!");
     })
     .catch(function (error) {
-      console.error("Error removing document: ", error);
+      //console.error("Error removing document: ", error);
     });
 };
 
-exports.DELETEtodo = async (messageDetails) => {
-  const team = messageDetails.substr(0, messageDetails.indexOf(" "));
-  const idea = messageDetails.substr(messageDetails.indexOf(" ") + 1);
-
+exports.DELETEtodo = async (team, idea) => {
   await db
     .collection(team)
     .doc(idea.toString())
     .delete()
     .then(function () {
-      console.log("Document successfully deleted!");
+      //console.log("Document successfully deleted!");
     })
     .catch(function (error) {
-      console.error("Error removing document: ", error);
+      //console.error("Error removing document: ", error);
     });
 };
