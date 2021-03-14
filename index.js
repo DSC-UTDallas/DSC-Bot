@@ -63,7 +63,7 @@ client.on("message", async (msg) => {
     if (checkPermissions(msg, "Officers")) sendDM(msg, client);
   }
 
-  if (message.startsWith("!stream")) {
+  if (message.startsWith("!setstream")) {
     if (checkPermissions(msg, "Officers")) setStream(client, msg);
   }
 
