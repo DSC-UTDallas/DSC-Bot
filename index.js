@@ -75,6 +75,9 @@ client.on("message", async (msg) => {
   //HIDDEN COMMANDS
   if (message.startsWith("!pizza")) {
     msg.react("🍕");
+    console.log(
+      msg.author.username + "#" + msg.author.discriminator + " requested pizza"
+    );
   }
 
   if (message.startsWith("!barsha")) {

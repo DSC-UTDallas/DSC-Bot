@@ -11,9 +11,8 @@ const loggingBunyan = new LoggingBunyan({
 // Create a Bunyan logger that streams to Cloud Logging
 // Logs will be written to: "projects/YOUR_PROJECT_ID/logs/bunyan_log"
 exports.logger = bunyan.createLogger({
-  // The JSON payload of the log as it appears in Cloud Logging
-  // will contain "name": "my-service"
-  name: "dsc-discord-bot",
+  // The JSON payload of the log as it appears in Cloud Logging will contain "name": "dsc-agenda-bot"
+  name: "dsc-test",
   streams: [
     // Log to the console at 'info' and above
     { stream: process.stdout, level: "info" },
