@@ -68,18 +68,18 @@ exports.deleteIdea = async (msg) => {
       msg.author.username +
         "#" +
         msg.author.discriminator +
-        " added " +
+        " deleted idea index " +
         idea +
-        " to officer meeting agenda"
+        " from officer meeting agenda"
     );
   } catch (e) {
     loggerError(
       msg.author.username +
         "#" +
         msg.author.discriminator +
-        " could not add " +
+        " could not delete idea index " +
         idea +
-        " to officer meeting agenda",
+        " from officer meeting agenda",
       e
     );
   }
