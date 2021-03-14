@@ -14,7 +14,6 @@ const client = new Discord.Client({
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
-  logger.info("Logged in");
   client.user.setActivity("!help", { type: "LISTENING" });
 });
 
@@ -97,7 +96,14 @@ client.on("message", async (msg) => {
 });
 
 client.on("messageReactionAdd", async (reaction, user) => {
-  addRole(reaction, user);
+  try {
+    addRole(reaction, user);
+  } catch (e) {
+    logger.error(
+      user.username + "#" + user.discriminator + " was not given role Member"
+    );
+    logger.error(e);
+  }
 });
 
 client.login(process.env.DISCORD_TOKEN);

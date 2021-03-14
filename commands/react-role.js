@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+const { logger } = require("../utils/logging.js");
 const fs = require("fs");
 const path = require("path");
 
@@ -34,9 +35,19 @@ exports.addRole = async (reaction, user) => {
 
   if (reaction.message.channel.name === "rules") {
     if (reaction.emoji.name === "👍") {
-      await reaction.message.guild.members.cache
-        .get(user.id)
-        .roles.add(memberRoleID);
+      try {
+        await reaction.message.guild.members.cache
+          .get(user.id)
+          .roles.add(memberRoleID);
+      } catch (e) {
+        logger.error(
+          user.username +
+            "#" +
+            user.discriminator +
+            " was not given role Member"
+        );
+        logger.error(e);
+      }
     }
   }
 };
