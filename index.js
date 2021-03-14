@@ -74,10 +74,14 @@ client.on("message", async (msg) => {
 
   //HIDDEN COMMANDS
   if (message.startsWith("!pizza")) {
-    msg.react("🍕");
-    console.log(
-      msg.author.username + "#" + msg.author.discriminator + " requested pizza"
-    );
+    const author = msg.author.username + "#" + msg.author.discriminator;
+    try {
+      msg.react("🍕");
+      logger.info(author + " requested pizza");
+    } catch (e) {
+      logger.error(author + " could not request pizza ;-;");
+      logger.error(e);
+    }
   }
 
   if (message.startsWith("!barsha")) {
