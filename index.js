@@ -1,4 +1,5 @@
 require("dotenv").config();
+const { logger } = require("./utils/logging.js");
 const { checkPermissions } = require("./utils/permissions");
 const { sendRulesReaction, addRole } = require("./commands/react-role");
 const { addIdea, getIdeas, deleteIdea } = require("./commands/agenda");
@@ -13,6 +14,7 @@ const client = new Discord.Client({
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
+  logger.info("Logged in");
   client.user.setActivity("!help", { type: "LISTENING" });
 });
 
