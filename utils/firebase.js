@@ -50,10 +50,10 @@ exports.POSTidea = async (idea) => {
       agendaIdea: idea,
     })
     .then(function (docRef) {
-      console.log("Document written");
+      //console.log("Document written");
     })
     .catch(function (error) {
-      console.error("Error adding document: ", error);
+      //console.error("Error adding document: ", error);
     });
 };
 
@@ -67,10 +67,10 @@ exports.POSTtodo = async (team, idea) => {
       todo: idea,
     })
     .then(function (docRef) {
-      console.log("Document written");
+      //console.log("Document written");
     })
     .catch(function (error) {
-      console.error("Error adding document: ", error);
+      //console.error("Error adding document: ", error);
     });
 };
 
@@ -80,10 +80,10 @@ exports.DELETEidea = async (index) => {
     .doc(index.toString())
     .delete()
     .then(function () {
-      console.log("Document successfully deleted!");
+      //console.log("Document successfully deleted!");
     })
     .catch(function (error) {
-      console.error("Error removing document: ", error);
+      //console.error("Error removing document: ", error);
     });
 };
 
@@ -93,9 +93,9 @@ exports.DELETEtodo = async (team, idea) => {
     .doc(idea.toString())
     .delete()
     .then(function () {
-      console.log("Document successfully deleted!");
+      //console.log("Document successfully deleted!");
     })
     .catch(function (error) {
-      console.error("Error removing document: ", error);
+      //console.error("Error removing document: ", error);
     });
 };
