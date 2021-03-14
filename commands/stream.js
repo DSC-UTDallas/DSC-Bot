@@ -21,13 +21,13 @@ exports.setStream = async (client, msg) => {
         stream
     );
   } catch (e) {
-    loggerInfo(
+    loggerError(
       msg.author.username +
         "#" +
         msg.author.discriminator +
         " could not set stream to " +
         stream,
-      "e"
+      e
     );
   }
 };
@@ -43,7 +43,7 @@ exports.stopStream = async (client, msg) => {
         " set stream back to default "
     );
   } catch (e) {
-    loggerInfo(
+    loggerError(
       msg.author.username +
         "#" +
         msg.author.discriminator +
