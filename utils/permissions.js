@@ -8,8 +8,7 @@ exports.checkPermissions = (msg, role) => {
     );
   } catch (e) {
     const author = msg.author.username + "#" + msg.author.discriminator;
-    logger.error("Error in checking if " + author + " has role " + role);
-    logger.error(e);
+    loggerError("Error in checking if " + author + " has role " + role, e);
   }
   if (permsAssigned) {
     return true;

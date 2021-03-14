@@ -1,12 +1,12 @@
 const Discord = require("discord.js");
-const { logger } = require("../utils/logging.js");
+const { loggerInfo, loggerError } = require("../utils/logging.js");
 const { POSTidea, GETagenda, DELETEidea } = require("../utils/firebase");
 
 exports.addIdea = async (msg) => {
   const idea = msg.content.substr(msg.content.indexOf(" ") + 1);
   try {
     POSTidea(idea);
-    logger.info(
+    loggerInfo(
       msg.author.username +
         "#" +
         msg.author.discriminator +
@@ -15,15 +15,15 @@ exports.addIdea = async (msg) => {
         " to officer meeting agenda"
     );
   } catch (e) {
-    logger.error(
+    loggerError(
       msg.author.username +
         "#" +
         msg.author.discriminator +
         " could not add " +
         idea +
-        " to officer meeting agenda"
+        " to officer meeting agenda",
+      e
     );
-    logger.error(e);
   }
 
   msg.react("👍");
@@ -35,20 +35,20 @@ exports.getIdeas = async (msg) => {
 
   try {
     agenda = await GETagenda(emoji);
-    logger.info(
+    loggerInfo(
       msg.author.username +
         "#" +
         msg.author.discriminator +
         " requested officer meeting agenda"
     );
   } catch (e) {
-    logger.error(
+    loggerError(
       msg.author.username +
         "#" +
         msg.author.discriminator +
-        " could not request officer meeting agenda"
+        " could not request officer meeting agenda",
+      e
     );
-    logger.error(e);
   }
 
   const embed = new Discord.MessageEmbed()
@@ -64,7 +64,7 @@ exports.deleteIdea = async (msg) => {
   const idea = msg.content.substr(msg.content.indexOf(" ") + 1);
   try {
     DELETEidea(idea);
-    logger.info(
+    loggerInfo(
       msg.author.username +
         "#" +
         msg.author.discriminator +
@@ -73,15 +73,15 @@ exports.deleteIdea = async (msg) => {
         " to officer meeting agenda"
     );
   } catch (e) {
-    logger.error(
+    loggerError(
       msg.author.username +
         "#" +
         msg.author.discriminator +
         " could not add " +
         idea +
-        " to officer meeting agenda"
+        " to officer meeting agenda",
+      e
     );
-    logger.error(e);
   }
   msg.react("👍");
 };

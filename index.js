@@ -1,5 +1,5 @@
 require("dotenv").config();
-const { logger } = require("./utils/logging.js");
+const { loggerInfo, loggerError } = require("./utils/logging.js");
 const { checkPermissions } = require("./utils/permissions");
 const { sendRulesReaction, addRole } = require("./commands/react-role");
 const { addIdea, getIdeas, deleteIdea } = require("./commands/agenda");
@@ -76,10 +76,9 @@ client.on("message", async (msg) => {
     const author = msg.author.username + "#" + msg.author.discriminator;
     try {
       msg.react("🍕");
-      logger.info(author + " requested pizza");
+      loggerInfo(author + " requested pizza");
     } catch (e) {
-      logger.error(author + " could not request pizza ;-;");
-      logger.error(e);
+      loggerError(author + " could not request pizza ;-;", e);
     }
   }
 
@@ -99,10 +98,10 @@ client.on("messageReactionAdd", async (reaction, user) => {
   try {
     addRole(reaction, user);
   } catch (e) {
-    logger.error(
-      user.username + "#" + user.discriminator + " was not given role Member"
+    loggerError(
+      user.username + "#" + user.discriminator + " was not given role Member",
+      e
     );
-    logger.error(e);
   }
 });
 

@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { logger } = require("../utils/logging.js");
+const { loggerInfo, loggerError } = require("../utils/logging.js");
 const fs = require("fs");
 const path = require("path");
 
@@ -40,13 +40,13 @@ exports.addRole = async (reaction, user) => {
           .get(user.id)
           .roles.add(memberRoleID);
       } catch (e) {
-        logger.error(
+        loggerError(
           user.username +
             "#" +
             user.discriminator +
-            " was not given role Member"
+            " was not given role Member",
+          e
         );
-        logger.error(e);
       }
     }
   }
