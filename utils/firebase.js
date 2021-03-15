@@ -21,7 +21,7 @@ exports.GETagenda = async (emoji) => {
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        agenda.push(`${emoji} ` + doc.data().agendaIdea);
+        agenda.push(`${emoji} ` + doc.id + " - " + doc.data().agendaIdea);
       });
     });
   return agenda;
@@ -34,7 +34,7 @@ exports.GETtodo = async (team, emoji) => {
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        agenda.push(`${emoji} ` + doc.data().todo);
+        agenda.push(`${emoji} ` + doc.id + " - " + doc.data().todo);
       });
     });
   return agenda;
@@ -47,13 +47,13 @@ exports.POSTidea = async (idea) => {
     .collection("DSC UTD")
     .doc(index.toString())
     .set({
-      agendaIdea: index.toString() + " - " + idea,
+      agendaIdea: idea,
     })
     .then(function (docRef) {
-      console.log("Document written");
+      //console.log("Document written");
     })
     .catch(function (error) {
-      console.error("Error adding document: ", error);
+      //console.error("Error adding document: ", error);
     });
 };
 
@@ -64,13 +64,13 @@ exports.POSTtodo = async (team, idea) => {
     .collection(team)
     .doc(index.toString())
     .set({
-      todo: index.toString() + " - " + idea,
+      todo: idea,
     })
     .then(function (docRef) {
-      console.log("Document written");
+      //console.log("Document written");
     })
     .catch(function (error) {
-      console.error("Error adding document: ", error);
+      //console.error("Error adding document: ", error);
     });
 };
 
@@ -80,10 +80,10 @@ exports.DELETEidea = async (index) => {
     .doc(index.toString())
     .delete()
     .then(function () {
-      console.log("Document successfully deleted!");
+      //console.log("Document successfully deleted!");
     })
     .catch(function (error) {
-      console.error("Error removing document: ", error);
+      //console.error("Error removing document: ", error);
     });
 };
 
@@ -93,9 +93,9 @@ exports.DELETEtodo = async (team, idea) => {
     .doc(idea.toString())
     .delete()
     .then(function () {
-      console.log("Document successfully deleted!");
+      //console.log("Document successfully deleted!");
     })
     .catch(function (error) {
-      console.error("Error removing document: ", error);
+      //console.error("Error removing document: ", error);
     });
 };

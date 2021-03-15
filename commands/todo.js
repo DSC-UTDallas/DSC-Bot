@@ -1,16 +1,59 @@
 const Discord = require("discord.js");
+const { loggerInfo, loggerError } = require("../utils/logging.js");
 const { POSTtodo, GETtodo, DELETEtodo } = require("../utils/firebase");
 
-exports.addTodo = async (msg, messageDetails) => {
-  const team = messageDetails.substr(0, messageDetails.indexOf(" "));
-  const idea = messageDetails.substr(messageDetails.indexOf(" ") + 1);
-  POSTtodo(team, idea);
-  msg.react("👍");
+exports.addTodo = async (msg, ideaDetails) => {
+  const team = ideaDetails.substr(0, ideaDetails.indexOf(" "));
+  const idea = ideaDetails.substr(ideaDetails.indexOf(" ") + 1);
+  try {
+    POSTtodo(team, idea);
+    msg.react("👍");
+    loggerInfo(
+      msg.author.username +
+        "#" +
+        msg.author.discriminator +
+        " added " +
+        idea +
+        " todo items for role " +
+        team
+    );
+  } catch (e) {
+    loggerError(
+      msg.author.username +
+        "#" +
+        msg.author.discriminator +
+        " could not add " +
+        idea +
+        " todo items for role " +
+        team,
+      e
+    );
+  }
 };
 
 exports.getTodo = async (msg, team) => {
   const emoji = msg.guild.emojis.cache.find((emoji) => emoji.name === "dsc");
-  agenda = await GETtodo(team, emoji);
+  var agenda;
+
+  try {
+    agenda = await GETtodo(team, emoji);
+    loggerInfo(
+      msg.author.username +
+        "#" +
+        msg.author.discriminator +
+        " requested todo items for role " +
+        team
+    );
+  } catch (e) {
+    loggerError(
+      msg.author.username +
+        "#" +
+        msg.author.discriminator +
+        " could not request todo items for role " +
+        team,
+      e
+    );
+  }
 
   const embed = new Discord.MessageEmbed()
     .setTitle("Todo Items for This Team")
@@ -21,9 +64,31 @@ exports.getTodo = async (msg, team) => {
   msg.delete({ timeout: 1000 });
 };
 
-exports.deleteTodo = async (msg, messageDetails) => {
-  const team = messageDetails.substr(0, messageDetails.indexOf(" "));
-  const idea = messageDetails.substr(messageDetails.indexOf(" ") + 1);
-  DELETEtodo(team, idea);
-  msg.react("👍");
+exports.deleteTodo = async (msg, ideaDetails) => {
+  const team = ideaDetails.substr(0, ideaDetails.indexOf(" "));
+  const idea = ideaDetails.substr(ideaDetails.indexOf(" ") + 1);
+  try {
+    DELETEtodo(team, idea);
+    msg.react("👍");
+    loggerInfo(
+      msg.author.username +
+        "#" +
+        msg.author.discriminator +
+        " deleted idea index " +
+        idea +
+        " from todo items for role " +
+        team
+    );
+  } catch (e) {
+    loggerError(
+      msg.author.username +
+        "#" +
+        msg.author.discriminator +
+        " could not delete idea index " +
+        idea +
+        " from todo items for role " +
+        team,
+      e
+    );
+  }
 };

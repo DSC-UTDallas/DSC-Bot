@@ -19,8 +19,11 @@
   },
   "homepage": "https://github.com/DSC-UTDallas/Agenda-Bot#readme",
   "dependencies": {
+    "@google-cloud/logging-bunyan": "^3.0.2",
+    "bunyan": "^1.8.15",
     "discord.js": "^12.3.1",
     "dotenv": "^8.2.0",
-    "firebase": "^7.19.1"
+    "firebase": "^7.19.1",
+    "nodemon": "^2.0.7"
   }
 }

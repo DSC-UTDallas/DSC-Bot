@@ -1,4 +1,6 @@
 require("dotenv").config();
+const { loggerInfo, loggerError } = require("./utils/logging.js");
+const { checkPermissions } = require("./utils/permissions");
 const { sendRulesReaction, addRole } = require("./commands/react-role");
 const { addIdea, getIdeas, deleteIdea } = require("./commands/agenda");
 const { addTodo, getTodo, deleteTodo } = require("./commands/todo");
@@ -21,81 +23,59 @@ client.on("message", async (msg) => {
   if (message.startsWith("!help")) sendCommands(msg);
 
   if (message.startsWith("!addidea")) {
-    if (msg.member.roles.cache.find((r) => r.name === "Officers")) addIdea(msg);
-    else {
-      msg.reply("Access denied to command");
-    }
+    if (checkPermissions(msg, "Officers")) addIdea(msg);
   }
 
   if (message.startsWith("!addtodo")) {
     const messageDetails = message.substr(message.indexOf(" ") + 1);
     const team = messageDetails.split(" ")[0];
-
-    if (msg.member.roles.cache.some((r) => r.name.toLowerCase() === team)) {
-      addTodo(msg, messageDetails);
-    } else {
-      msg.reply("Access denied to command");
-    }
+    if (checkPermissions(msg, team)) addTodo(msg, messageDetails);
   }
 
   if (message.startsWith("!ideas")) {
-    if (msg.member.roles.cache.find((r) => r.name === "Officers"))
-      getIdeas(msg);
-    else msg.reply("Access denied to command");
+    if (checkPermissions(msg, "Officers")) getIdeas(msg);
   }
 
   if (message.startsWith("!todo")) {
     const team = message.substr(message.indexOf(" ") + 1);
-
-    if (msg.member.roles.cache.some((r) => r.name.toLowerCase() === team))
-      getTodo(msg, team);
-    else msg.reply("Access denied to command");
+    if (checkPermissions(msg, team)) getTodo(msg, team);
   }
 
   if (message.startsWith("!removeidea")) {
-    if (msg.member.roles.cache.find((r) => r.name === "Officers"))
-      deleteIdea(msg);
-    else msg.reply("Access denied to command");
+    if (checkPermissions(msg, "Officers")) deleteIdea(msg);
   }
 
   if (message.startsWith("!removetodo")) {
     const messageDetails = message.substr(message.indexOf(" ") + 1);
     const team = messageDetails.split(" ")[0];
-
-    if (msg.member.roles.cache.some((r) => r.name.toLowerCase() === team)) {
-      deleteTodo(msg, messageDetails);
-    } else {
-      msg.reply("Access denied to command");
-    }
+    if (checkPermissions(msg, team)) deleteTodo(msg, messageDetails);
   }
 
   if (message.startsWith("!rules")) {
-    if (msg.member.roles.cache.find((r) => r.name === "Officers"))
-      sendRulesReaction(msg);
-    else msg.reply("Access denied to command");
+    if (checkPermissions(msg, "Officers")) sendRulesReaction(msg);
   }
 
   if (message.startsWith("!message")) {
-    if (msg.member.roles.cache.find((r) => r.name === "Officers"))
-      sendMessage(msg, client);
-    else msg.reply("Access denied to command");
+    if (checkPermissions(msg, "Officers")) sendMessage(msg, client);
   }
 
-  if (message.startsWith("!stream")) {
-    if (msg.member.roles.cache.find((r) => r.name === "Officers"))
-      setStream(msg, client);
-    else msg.reply("Access denied to command");
+  if (message.startsWith("!setstream")) {
+    if (checkPermissions(msg, "Officers")) setStream(client, msg);
   }
 
   if (message.startsWith("!stopstream")) {
-    if (msg.member.roles.cache.find((r) => r.name === "Officers"))
-      stopStream(msg, client);
-    else msg.reply("Access denied to command");
+    if (checkPermissions(msg, "Officers")) stopStream(client, msg);
   }
 
   //HIDDEN COMMANDS
   if (message.startsWith("!pizza")) {
-    msg.react("🍕");
+    const author = msg.author.username + "#" + msg.author.discriminator;
+    try {
+      msg.react("🍕");
+      loggerInfo(author + " requested pizza");
+    } catch (e) {
+      loggerError(author + " could not request pizza ;-;", e);
+    }
   }
 
   if (message.startsWith("!barsha")) {
@@ -111,7 +91,14 @@ client.on("message", async (msg) => {
 });
 
 client.on("messageReactionAdd", async (reaction, user) => {
-  addRole(reaction, user);
+  try {
+    addRole(reaction, user);
+  } catch (e) {
+    loggerError(
+      user.username + "#" + user.discriminator + " was not given role Member",
+      e
+    );
+  }
 });
 
 client.login(process.env.DISCORD_TOKEN);
