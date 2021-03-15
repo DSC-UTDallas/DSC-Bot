@@ -55,7 +55,6 @@ exports.getTodo = async (msg, team) => {
     );
   }
 
-  //msg.channel.send("These are the agenda items for next meeting: ");
   const embed = new Discord.MessageEmbed()
     .setTitle("Todo Items for This Team")
     .setColor(0x2b85d3)

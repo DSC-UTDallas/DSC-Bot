@@ -17,8 +17,8 @@ exports.sendCommands = (msg) => {
       `${emoji} !removeIdea <idea-index>: To remove the idea from next meeting agenda`,
       `${emoji} !message <channelID> <message>: To send a message to a channel`,
       // `${emoji} !dm <userID> <message>: To send a dm to a user`,
-      `${emoji} !setStream <stream-link> <event-name>: Sets activity to - playing event and shows Twitch link if available`,
-      `${emoji} !stopStream: Sets activity to - listening to !help`,
+      `${emoji} !stream <stream-link> <event-name>: Sets activity to - playing event and shows Twitch link if available`,
+      `${emoji} !stopStream: Sets activity - to listening to !help`,
     ];
     commands = commands.concat(officerCommands);
   }
