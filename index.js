@@ -68,7 +68,7 @@ client.on("message", async (msg) => {
     if (checkPermissions(msg, "Officers")) stopStream(client, msg);
   }
 
-  if (message.startsWith(!qotd)) {
+  if (message.startsWith("!qotd")) {
     if (checkPermissions(msg, "Officers")) sendQOTD(client, msg);
   }
 
