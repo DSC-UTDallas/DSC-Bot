@@ -25,5 +25,5 @@ exports.sendQOTD = async (client, msg) => {
     .addField("Ask the next QOTD", "https://forms.gle/wNfQcycbedaRwYnU7", true);
 
   msg.react("👍");
-  channel.send(embed);
+  channel.send(embed).then((qotdMessage) => qotdMessage.pin());
 };
