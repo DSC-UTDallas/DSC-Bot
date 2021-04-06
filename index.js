@@ -72,6 +72,9 @@ client.on("message", async (msg) => {
     if (checkPermissions(msg, "Officers")) sendQOTD(client, msg);
   }
 
+  // if (msg.type === "PINS_ADD" && msg.channel.id === "756050285842923561")
+  //   msg.delete();
+
   //HIDDEN COMMANDS
   if (message.startsWith("!pizza")) {
     const author = msg.author.username + "#" + msg.author.discriminator;
