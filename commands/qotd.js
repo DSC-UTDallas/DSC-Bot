@@ -26,7 +26,9 @@ exports.sendQOTD = async (client, msg) => {
 
   msg.react("👍");
   const allMessages = await channel.messages.fetch();
-  const pinned = allMessages.filter((message) => message.pinned);
+  const pinned = allMessages.filter(
+    (message) => message.pinned && message.author.bot
+  );
   await pinned.forEach((pin) => pin.unpin());
   channel.send(embed).then((qotdMessage) => qotdMessage.pin());
 };
