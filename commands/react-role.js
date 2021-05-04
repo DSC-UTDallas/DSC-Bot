@@ -8,10 +8,9 @@ const fs = require("fs");
 const path = require("path");
 
 //prod
-// const token =
-//   "TxJq8bn3_JyVZpkvc-Ite2bUabkgV1TnhG7zGK_nmOoesb1LuCOw1EVCfsHDZG71az8Z";
+const memberRoleID = "756049478330613801";
 //dev
-const memberRoleID = "756046335832096789";
+// const memberRoleID = "756046335832096789";
 
 exports.sendRulesReaction = async (msg) => {
   const text = fs.readFileSync(path.resolve(__dirname, "../rules.txt"), "utf8");
