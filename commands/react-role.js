@@ -1,9 +1,16 @@
 const Discord = require("discord.js");
 const { loggerInfo, loggerError } = require("../utils/logging.js");
+const {
+  logReactionRequest,
+  logReactionSuccess,
+} = require("../utils/reaction_logging");
 const fs = require("fs");
 const path = require("path");
 
+//prod
 const memberRoleID = "756049478330613801";
+//dev
+// const memberRoleID = "756046335832096789";
 
 exports.sendRulesReaction = async (msg) => {
   const text = fs.readFileSync(path.resolve(__dirname, "../rules.txt"), "utf8");
@@ -36,9 +43,13 @@ exports.addRole = async (reaction, user) => {
   if (reaction.message.channel.name === "rules") {
     if (reaction.emoji.name === "👍") {
       try {
-        await reaction.message.guild.members.cache
-          .get(user.id)
-          .roles.add(memberRoleID);
+        // await reaction.message.guild.members.cache
+        //   .get(user.id)
+        //   .roles.add(memberRoleID);
+        user = await reaction.message.guild.members.cache.get(user.id);
+        logReactionRequest(user, "Member");
+        user.roles.add(memberRoleID);
+        logReactionSuccess(user, "Member");
         loggerInfo(
           user.username + "#" + user.discriminator + " was given role Member"
         );
