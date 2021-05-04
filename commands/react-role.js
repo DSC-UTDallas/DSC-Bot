@@ -3,7 +3,17 @@ const { loggerInfo, loggerError } = require("../utils/logging.js");
 const fs = require("fs");
 const path = require("path");
 
-const memberRoleID = "756049478330613801";
+//prod
+// const memberRoleID = "756049478330613801";
+// const id = "838935128796299264";
+// const token =
+//   "TxJq8bn3_JyVZpkvc-Ite2bUabkgV1TnhG7zGK_nmOoesb1LuCOw1EVCfsHDZG71az8Z";
+//dev
+const id = process.env.reaction_log_webhook_id;
+const token = process.env.reaction_log_webhook_token;
+const memberRoleID = "756046335832096789";
+
+const webhook = new Discord.WebhookClient(id, token);
 
 exports.sendRulesReaction = async (msg) => {
   const text = fs.readFileSync(path.resolve(__dirname, "../rules.txt"), "utf8");
@@ -36,9 +46,13 @@ exports.addRole = async (reaction, user) => {
   if (reaction.message.channel.name === "rules") {
     if (reaction.emoji.name === "👍") {
       try {
-        await reaction.message.guild.members.cache
-          .get(user.id)
-          .roles.add(memberRoleID);
+        // await reaction.message.guild.members.cache
+        //   .get(user.id)
+        //   .roles.add(memberRoleID);
+        user = await reaction.message.guild.members.cache.get(user.id);
+        webhook.send(`${user} reacted`).catch(console.error);
+        user.roles.add(memberRoleID);
+        webhook.send(`${user} got member role`).catch(console.error);
         loggerInfo(
           user.username + "#" + user.discriminator + " was given role Member"
         );
