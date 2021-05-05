@@ -5,6 +5,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client({
   partials: ["MESSAGE", "CHANNEL", "REACTION"],
 });
+const { generalLog } = require("./reaction_logging");
 
 // Creates a client
 const loggingBunyan = new LoggingBunyan({
@@ -32,4 +33,5 @@ exports.loggerInfo = async (infoMessage) => {
 exports.loggerError = async (errorMessage, error) => {
   logger.error(errorMessage);
   logger.error(error);
+  generalLog(errorMessage);
 };
