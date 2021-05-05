@@ -1,9 +1,6 @@
 const Discord = require("discord.js");
 const { loggerInfo, loggerError } = require("../utils/logging.js");
-const {
-  logReactionRequest,
-  logReactionSuccess,
-} = require("../utils/reaction_logging");
+const { logReactionRequest, logReactionSuccess } = require("../utils/logging");
 const fs = require("fs");
 const path = require("path");
 
@@ -44,9 +41,9 @@ exports.addRole = async (reaction, user) => {
     if (reaction.emoji.name === "👍") {
       try {
         user = await reaction.message.guild.members.cache.get(user.id);
-        //logReactionRequest(user, "Member");
+        logReactionRequest(user, "Member");
         user.roles.add(memberRoleID);
-        //logReactionSuccess(user, "Member");
+        logReactionSuccess(user, "Member");
         loggerInfo(
           user.username + "#" + user.discriminator + " was given role Member"
         );
