@@ -43,13 +43,10 @@ exports.addRole = async (reaction, user) => {
   if (reaction.message.channel.name === "rules") {
     if (reaction.emoji.name === "👍") {
       try {
-        // await reaction.message.guild.members.cache
-        //   .get(user.id)
-        //   .roles.add(memberRoleID);
         user = await reaction.message.guild.members.cache.get(user.id);
-        logReactionRequest(user, "Member");
+        //logReactionRequest(user, "Member");
         user.roles.add(memberRoleID);
-        logReactionSuccess(user, "Member");
+        //logReactionSuccess(user, "Member");
         loggerInfo(
           user.username + "#" + user.discriminator + " was given role Member"
         );
