@@ -54,7 +54,7 @@ client.on("message", async (msg) => {
   }
 
   if (message.startsWith("!rules")) {
-    if (checkPermissions(msg, "Officers")) sendRulesReaction(msg);
+    if (checkPermissions(msg, "Developers")) sendRulesReaction(msg);
   }
 
   if (message.startsWith("!message")) {
@@ -73,16 +73,16 @@ client.on("message", async (msg) => {
     if (checkPermissions(msg, "Officers")) sendQOTD(client, msg);
   }
 
-  if (message.startsWith("!clubInfo")) {
-    if (checkPermissions(msg, "Officers")) sendInfo(client, msg);
+  if (message.startsWith("!clubinfo")) {
+    if (checkPermissions(msg, "Developers")) sendInfo(client, msg);
   }
 
   if (message.startsWith("!officers")) {
-    if (checkPermissions(msg, "Officers")) sendOfficers(client, msg);
+    if (checkPermissions(msg, "Developers")) sendOfficers(client, msg);
   }
 
   if (message.startsWith("!deleteofficers")) {
-    if (checkPermissions(msg, "Officers")) deleteMessages(client, msg);
+    if (checkPermissions(msg, "Developers")) deleteMessages(client, msg);
   }
 
   // if (msg.type === "PINS_ADD" && msg.channel.id === "756050285842923561")
