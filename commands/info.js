@@ -52,7 +52,7 @@ exports.sendInfo = async (client, msg) => {
     msg.react("👍");
     loggerInfo("Club info sent to channel");
   } catch (e) {
-    loggerInfo("Club info could not be sent to channel");
+    loggerError("Club info could not be sent to channel");
   }
 };
 
@@ -94,6 +94,18 @@ exports.sendOfficers = async (client, msg) => {
     msg.react("👍");
     loggerInfo("Officer info sent to channel");
   } catch (e) {
-    loggerInfo("Officer info could not be sent to channel");
+    loggerError("Officer info could not be sent to channel");
   }
+};
+
+exports.deleteMessages = async (client, msg) => {
+  //dev
+  const channelID = "756050285842923561";
+  //prod
+  //const channelID = "843693564650061844";
+  const channel = client.channels.cache.get(channelID);
+
+  const fetched = await channel.messages.fetch();
+  await fetched.forEach((message) => message.delete());
+  msg.react("👍");
 };
