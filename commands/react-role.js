@@ -1,9 +1,6 @@
 const Discord = require("discord.js");
 const { loggerInfo, loggerError } = require("../utils/logging.js");
-const {
-  logReactionRequest,
-  logReactionSuccess,
-} = require("../utils/reaction_logging");
+const { logReactionRequest, logReactionSuccess } = require("../utils/logging");
 const fs = require("fs");
 const path = require("path");
 
