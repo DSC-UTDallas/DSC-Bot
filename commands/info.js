@@ -1,11 +1,13 @@
 const Discord = require("discord.js");
 const { loggerInfo, loggerError } = require("../utils/logging.js");
+const officers = require("../officers.json");
 
 exports.sendInfo = async (client, msg) => {
   try {
-    //Use 756050285842923561 for production
-    //Use 841073458719752262 for dev
+    //dev
     const channelID = "756050285842923561";
+    //prod
+    //const channelID = "841073458719752262";
     const channel = client.channels.cache.get(channelID);
 
     const about = [
@@ -54,4 +56,34 @@ exports.sendInfo = async (client, msg) => {
   }
 };
 
-exports.sendOfficers = async (client, msg) => {};
+exports.sendOfficers = async (client, msg) => {
+  try {
+    //dev
+    const channelID = "756050285842923561";
+    //prod
+    //const channelID = "843693564650061844";
+    const channel = client.channels.cache.get(channelID);
+
+    console.log(officers);
+    for (index in officers) {
+      console.log(index);
+      officer = officers[index];
+      console.log(officer);
+      const embed = new Discord.MessageEmbed()
+        .setTitle(officer.position)
+        .setColor(0x2b85d3)
+        .setDescription("<@!" + officer.id + ">")
+        .setThumbnail(officer.photo)
+        .addFields(
+          { name: "Major", value: officer.major },
+          { name: "Fun Fact", value: officer.fun_fact }
+        );
+      channel.send(embed);
+    }
+
+    msg.react("👍");
+    // loggerInfo(question + " by " + sender + " has been asked");
+  } catch (e) {
+    // loggerError(question + " by " + sender + " could not be asked", e);
+  }
+};
