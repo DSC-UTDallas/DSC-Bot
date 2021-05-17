@@ -50,9 +50,9 @@ exports.sendInfo = async (client, msg) => {
     channel.send(joinEmbed);
 
     msg.react("👍");
-    // loggerInfo(question + " by " + sender + " has been asked");
+    loggerInfo("Club info sent to channel");
   } catch (e) {
-    // loggerError(question + " by " + sender + " could not be asked", e);
+    loggerInfo("Club info could not be sent to channel");
   }
 };
 
@@ -64,11 +64,21 @@ exports.sendOfficers = async (client, msg) => {
     //const channelID = "843693564650061844";
     const channel = client.channels.cache.get(channelID);
 
-    console.log(officers);
+    const embed = new Discord.MessageEmbed()
+      .setTitle("Faculty Advisor")
+      .setColor(0x2b85d3)
+      .setDescription("Dr. Klyne Smith")
+      .setThumbnail(
+        "https://i0.wp.com/cs.utdallas.edu/wp-content/uploads/2020/03/Klyne-NewHomePage-scaled.jpg?"
+      )
+      .addFields({
+        name: "Know More About Dr. Smith",
+        value: "https://cs.utdallas.edu/people/faculty/smith-klyne/",
+      });
+    channel.send(embed);
+
     for (index in officers) {
-      console.log(index);
       officer = officers[index];
-      console.log(officer);
       const embed = new Discord.MessageEmbed()
         .setTitle(officer.position)
         .setColor(0x2b85d3)
@@ -82,8 +92,8 @@ exports.sendOfficers = async (client, msg) => {
     }
 
     msg.react("👍");
-    // loggerInfo(question + " by " + sender + " has been asked");
+    loggerInfo("Officer info sent to channel");
   } catch (e) {
-    // loggerError(question + " by " + sender + " could not be asked", e);
+    loggerInfo("Officer info could not be sent to channel");
   }
 };
