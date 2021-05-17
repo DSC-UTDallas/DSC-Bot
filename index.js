@@ -8,6 +8,7 @@ const { sendMessage, sendDM } = require("./commands/message");
 const { setStream, stopStream } = require("./commands/stream");
 const { sendCommands } = require("./commands/help");
 const { sendQOTD } = require("./commands/qotd");
+const { sendInfo, sendOfficers } = require("./commands/info");
 const Discord = require("discord.js");
 const client = new Discord.Client({
   partials: ["MESSAGE", "CHANNEL", "REACTION"],
@@ -70,6 +71,14 @@ client.on("message", async (msg) => {
 
   if (message.startsWith("!qotd")) {
     if (checkPermissions(msg, "Officers")) sendQOTD(client, msg);
+  }
+
+  if (message.startsWith("!clubInfo")) {
+    if (checkPermissions(msg, "Officers")) sendInfo(client, msg);
+  }
+
+  if (message.startsWith("!officers")) {
+    if (checkPermissions(msg, "Officers")) sendOfficers(client, msg);
   }
 
   // if (msg.type === "PINS_ADD" && msg.channel.id === "756050285842923561")
