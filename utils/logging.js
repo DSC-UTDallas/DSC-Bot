@@ -43,6 +43,12 @@ exports.loggerError = async (errorMessage, error) => {
   webhook.send("<@&804262550110994433> " + errorMessage).catch(console.error);
 };
 
+exports.generalLogging = async (action, success, errorMsg, error) => {
+  action();
+  loggerInfo(success);
+  loggerError(errorMsg, error);
+};
+
 exports.logReactionRequest = async (user, role) => {
   webhook.send(`${user} reacted to get role ${role}`).catch(console.error);
 };
