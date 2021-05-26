@@ -12,16 +12,27 @@ exports.sendCommands = (msg) => {
 
   if (msg.member.roles.cache.find((r) => r.name === "Officers")) {
     officerCommands = [
+      " \n\n ** Officer Commands **",
       `${emoji} !ideas: To see the list of ideas and their indexes for next meeting agenda`,
       `${emoji} !addIdea <idea>: To add an idea for next meeting agenda (each idea will get assigned a random index)`,
       `${emoji} !removeIdea <idea-index>: To remove the idea from next meeting agenda`,
       `${emoji} !message <channelID> <message>: To send a message to a channel`,
-      // `${emoji} !dm <userID> <message>: To send a dm to a user`,
       `${emoji} !stream <stream-link> <event-name>: Sets activity to - playing event and shows Twitch link if available`,
       `${emoji} !stopStream: Sets activity - to listening to !help`,
       `${emoji} !qotd <senderName>|<question>: Sends question to qotd channel and tags senderName before`,
     ];
     commands = commands.concat(officerCommands);
+  }
+
+  if (msg.member.roles.cache.find((r) => r.name === "Developers")) {
+    devCommands = [
+      " \n\n ** Developer Commands **",
+      `${emoji} !rules: To send rules and react-role stuff`,
+      `${emoji} !clubinfo: To send club info`,
+      `${emoji} !officers: To send officer info`,
+      `${emoji} !deleteofficers: To delete officer info`,
+    ];
+    commands = commands.concat(devCommands);
   }
 
   msg.channel.send("These are the commands you can use (not case-sensitive):");
