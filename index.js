@@ -1,7 +1,11 @@
 require("dotenv").config();
 const { loggerInfo, loggerError } = require("./utils/logging.js");
 const { checkPermissions } = require("./utils/permissions");
-const { sendRulesReaction, addRole } = require("./commands/react-role");
+const {
+  sendRulesReaction,
+  sendRolesReaction,
+  addRole,
+} = require("./commands/react-role");
 const { addIdea, getIdeas, deleteIdea } = require("./commands/agenda");
 const { addTodo, getTodo, deleteTodo } = require("./commands/todo");
 const { sendMessage, sendDM } = require("./commands/message");
@@ -55,6 +59,10 @@ client.on("message", async (msg) => {
 
   if (message.startsWith("!rules")) {
     if (checkPermissions(msg, "Developers")) sendRulesReaction(msg);
+  }
+
+  if (message.startsWith("!roles")) {
+    if (checkPermissions(msg, "Developers")) sendRolesReaction(msg);
   }
 
   if (message.startsWith("!message")) {
@@ -116,7 +124,10 @@ client.on("messageReactionAdd", async (reaction, user) => {
     addRole(reaction, user);
   } catch (e) {
     loggerError(
-      user.username + "#" + user.discriminator + " was not given role Member",
+      user.username +
+        "#" +
+        user.discriminator +
+        ` was not given role ${reaction}`,
       e
     );
   }
