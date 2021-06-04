@@ -4,18 +4,29 @@ const fs = require("fs");
 const path = require("path");
 
 //prod
-// const memberRoleID = "756049478330613801";
 // const rulesChannelID = "756053715563315221";
+// const rolesChannelID = "850180171923062785";
+
+// const memberRoleID = "756049478330613801";
+// const partnerRoleID = "850173831049904169"
+// const qotdRoleID = "828768969808674836"
+// const factRoleID = "850173983453741057"
+
 //dev
-const memberRoleID = "756046335832096789";
 const rulesChannelID = "756050285842923561";
-const rolesChannelID = "755653627959443532";
+const rolesChannelID = "756050285842923561";
+
+const memberRoleID = "756046335832096789";
+const partnerRoleID = "850181566932189234";
+const qotdRoleID = "828774983001702462";
+const factRoleID = "850181730115780638";
+
 const reactionRolesMapping = new Map([
   // all these are prod values
   ["👍", memberRoleID],
-  ["🥳", "850173831049904169"],
-  ["❓", "828768969808674836"],
-  ["💫", "850173983453741057"],
+  ["🥳", partnerRoleID],
+  ["❓", qotdRoleID],
+  ["💫", factRoleID],
 ]);
 
 exports.sendRulesReaction = async (msg) => {
