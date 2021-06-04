@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const { loggerInfo, loggerError } = require('../utils/logging.js');
-const { logReactionRequest, logReactionSuccess } = require('../utils/logging');
 const fs = require('fs');
 const path = require('path');
 
@@ -12,10 +11,11 @@ const memberRoleID = '756046335832096789';
 const rulesChannelID = '756050285842923561';
 const rolesChannelID = '755653627959443532';
 const reactionRolesMapping = new Map([
+  // all these are prod values
   ['👍', memberRoleID],
-  ['🥳', '828774983001702462'],
-  ['❓', 'subscriber'],
-  ['💫', 'subscriber'],
+  ['🥳', '850173831049904169'],
+  ['❓', '828768969808674836'],
+  ['💫', '850173983453741057'],
 ]);
 
 exports.sendRulesReaction = async (msg) => {
@@ -71,19 +71,15 @@ exports.addRole = async (reaction, user) => {
     if (reactionRolesMapping.has(reaction.emoji.name)) {
       try {
         user = await reaction.message.guild.members.cache.get(user.id);
-        //logReactionRequest(user, "Member");
         reactionID = reactionRolesMapping.get(reaction.emoji.name);
         if (user.roles.cache.find((r) => r.id === reactionID)) {
           user.roles.remove(reactionID);
-          console.log('yeet');
         } else {
           user.roles.add(reactionID);
-          console.log('add');
         }
-        reaction.message.reactions.cache
+        reaction.message.reactions.cache // remove reaction from the message
           .find((r) => r.emoji.name == reaction.emoji.name)
           .users.remove(user);
-        //logReactionSuccess(user, "Member");
         loggerInfo(
           user.username +
             '#' +
@@ -97,47 +93,6 @@ exports.addRole = async (reaction, user) => {
             '#' +
             user.discriminator +
             ` was not given role ${reaction.emoji.name}`,
-          e
-        );
-      }
-    }
-  }
-};
-
-exports.removeRole = async (reaction, user) => {
-  if (reaction.message.partial) await reaction.message.fetch();
-  if (reaction.partial) await reaction.fetch();
-  if (user.bot) return;
-  if (!reaction.message.guild) return;
-
-  if (
-    (reaction.message.channel.id === rulesChannelID) |
-    (reaction.message.channel.id === rolesChannelID)
-  ) {
-    if (reactionRolesMapping.has(reaction.emoji.name)) {
-      try {
-        user = await reaction.message.guild.members.cache.get(user.id);
-        reactionID = reactionRolesMapping.get(reaction.emoji.name);
-        if (user.roles.cache.find((r) => r.id === reactionID)) {
-          user.roles.remove(reactionID);
-          console.log('yeet');
-        } else {
-          user.roles.add(reactionID);
-          console.log('add');
-        }
-        loggerInfo(
-          user.username +
-            '#' +
-            user.discriminator +
-            ` was removed role ${reaction.emoji.name}`
-        );
-      } catch (e) {
-        console.log(e);
-        loggerError(
-          user.username +
-            '#' +
-            user.discriminator +
-            ` was not removed role ${reaction.emoji.name}`,
           e
         );
       }

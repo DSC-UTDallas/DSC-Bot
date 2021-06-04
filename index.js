@@ -5,7 +5,6 @@ const {
   sendRulesReaction,
   sendRolesReaction,
   addRole,
-  removeRole,
 } = require('./commands/react-role');
 const { addIdea, getIdeas, deleteIdea } = require('./commands/agenda');
 const { addTodo, getTodo, deleteTodo } = require('./commands/todo');
@@ -125,7 +124,10 @@ client.on('messageReactionAdd', async (reaction, user) => {
     addRole(reaction, user);
   } catch (e) {
     loggerError(
-      user.username + '#' + user.discriminator + ' was not given role Member',
+      user.username +
+        '#' +
+        user.discriminator +
+        ` was not given role ${reaction}`,
       e
     );
   }
