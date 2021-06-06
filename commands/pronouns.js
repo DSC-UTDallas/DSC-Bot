@@ -8,14 +8,14 @@ const { loggerInfo, loggerError } = require("../utils/logging.js");
 const rolesChannelID = "756050285842923561";
 
 const reactionRolesMapping = new Map([
-  ["💖", "she/her"],
-  ["💙", "he/him"],
-  ["💜", "they/them"],
-  ["💛", "she/they"],
-  ["💚", "he/they"],
-  ["🧡", "ze/zer"],
-  ["🤍", "any pronouns"],
-  ["❓", "ask my pronouns"],
+  ["💖", "(she/her)"],
+  ["💙", "(he/him)"],
+  ["💜", "(they/them)"],
+  ["💛", "(she/they)"],
+  ["💚", "(he/they)"],
+  ["🧡", "(ze/zer)"],
+  ["🤍", "(any pronouns)"],
+  ["❓", "(ask my pronouns)"],
 ]);
 
 exports.sendPronounsReaction = async (client, msg) => {
@@ -60,8 +60,11 @@ exports.addPronoun = async (reaction, user) => {
         user = await reaction.message.guild.members.cache.get(user.id);
         pronouns = reactionRolesMapping.get(reaction.emoji.name);
         console.log(pronouns);
+        console.log(user.nickname);
+        user.setNickname(user.nickname + pronouns);
         // if (user.roles.cache.find((r) => r.id === reactionID)) {
-        //   user.roles.remove(reactionID);
+        //   //user.roles.remove(reactionID);
+        //   console.log("TODO: Remove pronoun");
         // } else {
         //   user.roles.add(reactionID);
         // }
