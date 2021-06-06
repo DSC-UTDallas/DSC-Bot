@@ -18,7 +18,9 @@ const reactionRolesMapping = new Map([
   ["❓", "ask my pronouns"],
 ]);
 
-exports.sendPronounsReaction = async (msg) => {
+exports.sendPronounsReaction = async (client, msg) => {
+  const rolesChannel = client.channels.cache.get(rolesChannelID);
+
   const embedRoles = new Discord.MessageEmbed()
     .setTitle("Add Pronuns to Nuckname")
     .setColor(0x2b85d3)
@@ -33,7 +35,7 @@ exports.sendPronounsReaction = async (msg) => {
       🤍 any pronouns
       ❓ ask my pronouns`
     );
-  let rolesMsg = await msg.channel.send(embedRoles);
+  let rolesMsg = await rolesChannel.send(embedRoles);
   rolesMsg.react("💖");
   rolesMsg.react("💙");
   rolesMsg.react("💜");
@@ -43,7 +45,7 @@ exports.sendPronounsReaction = async (msg) => {
   rolesMsg.react("🤍");
   rolesMsg.react("❓");
 
-  msg.delete({ timeout: 1000 });
+  msg.react("👍");
 };
 
 exports.addPronoun = async (reaction, user) => {

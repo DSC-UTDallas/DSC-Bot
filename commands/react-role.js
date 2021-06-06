@@ -28,7 +28,9 @@ const reactionRolesMapping = new Map([
   ["💫", factRoleID],
 ]);
 
-exports.sendRulesReaction = async (msg) => {
+exports.sendRulesReaction = async (client, msg) => {
+  const rulesChannel = client.channels.cache.get(rulesChannelID);
+
   const text = fs.readFileSync(path.resolve(__dirname, "../rules.txt"), "utf8");
   const rules = text.split("\n");
 
@@ -38,19 +40,21 @@ exports.sendRulesReaction = async (msg) => {
     .setTitle("Community Guidelines and Rules")
     .setColor(0x2b85d3)
     .setDescription(rules.slice(0, 15));
-  msg.channel.send(embedRules);
+  rulesChannel.send(embedRules);
 
   const embedAgreement = new Discord.MessageEmbed()
     .setTitle("Agreement to Community Guidelines and Rules")
     .setColor(0x2b85d3)
     .setDescription(agreement);
-  let agreementMsg = await msg.channel.send(embedAgreement);
+  let agreementMsg = await rulesChannel.send(embedAgreement);
   agreementMsg.react("👍");
 
-  msg.delete({ timeout: 1000 });
+  msg.react("👍");
 };
 
-exports.sendRolesReaction = async (msg) => {
+exports.sendRolesReaction = async (client, msg) => {
+  const rolesChannel = client.channels.cache.get(rolesChannelID);
+
   const embedRoles = new Discord.MessageEmbed()
     .setTitle("Role Notifications")
     .setColor(0x2b85d3)
@@ -60,12 +64,12 @@ exports.sendRolesReaction = async (msg) => {
       ❓ QOTW
       💫 Weekly Fun Facts`
     );
-  let rolesMsg = await msg.channel.send(embedRoles);
+  let rolesMsg = await rolesChannel.send(embedRoles);
   rolesMsg.react("🥳");
   rolesMsg.react("❓");
   rolesMsg.react("💫");
 
-  msg.delete({ timeout: 1000 });
+  msg.react("👍");
 };
 
 exports.addRole = async (reaction, user) => {
