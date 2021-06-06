@@ -22,7 +22,6 @@ const qotdRoleID = "828774983001702462";
 const factRoleID = "850181730115780638";
 
 const reactionRolesMapping = new Map([
-  // all these are prod values
   ["👍", memberRoleID],
   ["🥳", partnerRoleID],
   ["❓", qotdRoleID],
