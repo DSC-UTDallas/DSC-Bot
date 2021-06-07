@@ -6,6 +6,7 @@ const {
   sendRolesReaction,
   addRole,
 } = require("./commands/react-role");
+const { sendPronounsReaction, addPronoun } = require("./commands/pronouns");
 const { addIdea, getIdeas, deleteIdea } = require("./commands/agenda");
 const { addTodo, getTodo, deleteTodo } = require("./commands/todo");
 const { sendMessage, sendDM } = require("./commands/message");
@@ -58,11 +59,15 @@ client.on("message", async (msg) => {
   }
 
   if (message.startsWith("!rules")) {
-    if (checkPermissions(msg, "Developers")) sendRulesReaction(msg);
+    if (checkPermissions(msg, "Developers")) sendRulesReaction(client, msg);
   }
 
   if (message.startsWith("!roles")) {
-    if (checkPermissions(msg, "Developers")) sendRolesReaction(msg);
+    if (checkPermissions(msg, "Developers")) sendRolesReaction(client, msg);
+  }
+
+  if (message.startsWith("!pronouns")) {
+    if (checkPermissions(msg, "Developers")) sendPronounsReaction(client, msg);
   }
 
   if (message.startsWith("!message")) {
@@ -122,6 +127,7 @@ client.on("message", async (msg) => {
 client.on("messageReactionAdd", async (reaction, user) => {
   try {
     addRole(reaction, user);
+    addPronoun(reaction, user);
   } catch (e) {
     loggerError(
       user.username +

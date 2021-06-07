@@ -28,6 +28,8 @@ exports.sendCommands = (msg) => {
     devCommands = [
       " \n\n ** Developer Commands **",
       `${emoji} !rules: To send rules and react-role stuff`,
+      `${emoji} !roles: To send roles`,
+      `${emoji} !pronouns: To send pronouns`,
       `${emoji} !clubinfo: To send club info`,
       `${emoji} !officers: To send officer info`,
       `${emoji} !deleteofficers: To delete officer info`,
