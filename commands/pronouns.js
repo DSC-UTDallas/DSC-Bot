@@ -64,8 +64,8 @@ exports.addPronoun = async (reaction, user) => {
         else name = user.nickname;
         console.log(name + " " + name.indexOf("("));
         if (name.indexOf("(") != -1)
-          user.setNickname(name.substr(0, name.indexOf("(")));
-        user.setNickname(name + pronouns);
+          await user.setNickname(name.substr(0, name.indexOf("(")));
+        await user.setNickname(name + pronouns);
         reaction.message.reactions.cache // remove reaction from the message
           .find((r) => r.emoji.name == reaction.emoji.name)
           .users.remove(user);
