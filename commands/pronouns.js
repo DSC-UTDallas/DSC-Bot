@@ -22,7 +22,7 @@ exports.sendPronounsReaction = async (client, msg) => {
   const rolesChannel = client.channels.cache.get(rolesChannelID);
 
   const embedRoles = new Discord.MessageEmbed()
-    .setTitle("Add Pronuns to Nuckname")
+    .setTitle("Add Pronuns to Nickname")
     .setColor(0x2b85d3)
     .setDescription(
       `Here at DSC UTD, we value, love, and respect all identities! If you're comfortable with it, we'd like you to react with the corresponding heart to your pronouns so it can be added to your nickname. If your pronouns is not on this list, let one of our developers know and we'll add it to the list!.
