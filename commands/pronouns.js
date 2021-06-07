@@ -61,13 +61,8 @@ exports.addPronoun = async (reaction, user) => {
         pronouns = reactionRolesMapping.get(reaction.emoji.name);
         console.log(pronouns);
         console.log(user.nickname);
+        user.setNickname(user.nickname.substr(0, user.nickname.indexOf("(")));
         user.setNickname(user.nickname + pronouns);
-        // if (user.roles.cache.find((r) => r.id === reactionID)) {
-        //   //user.roles.remove(reactionID);
-        //   console.log("TODO: Remove pronoun");
-        // } else {
-        //   user.roles.add(reactionID);
-        // }
         reaction.message.reactions.cache // remove reaction from the message
           .find((r) => r.emoji.name == reaction.emoji.name)
           .users.remove(user);
