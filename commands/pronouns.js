@@ -56,29 +56,32 @@ exports.addPronoun = async (reaction, user) => {
 
   if (reaction.message.channel.id === rolesChannelID) {
     if (reactionRolesMapping.has(reaction.emoji.name)) {
+      pronouns = reactionRolesMapping.get(reaction.emoji.name);
       try {
         user = await reaction.message.guild.members.cache.get(user.id);
-        pronouns = reactionRolesMapping.get(reaction.emoji.name);
-        console.log(pronouns);
-        console.log(user.nickname);
-        user.setNickname(user.nickname.substr(0, user.nickname.indexOf("(")));
-        user.setNickname(user.nickname + pronouns);
+        var name = "";
+        if (user.nickname == null) name = user.user.username;
+        else name = user.nickname;
+        console.log(name + " " + name.indexOf("("));
+        if (name.indexOf("(") != -1)
+          user.setNickname(name.substr(0, name.indexOf("(")));
+        user.setNickname(name + pronouns);
         reaction.message.reactions.cache // remove reaction from the message
           .find((r) => r.emoji.name == reaction.emoji.name)
           .users.remove(user);
         loggerInfo(
-          user.username +
+          user.user.username +
             "#" +
-            user.discriminator +
+            user.user.discriminator +
             ` was given pronoun ${reaction.emoji.name} ${pronouns}`
         );
       } catch (e) {
         console.log(e);
         loggerError(
-          user.username +
+          user.user.username +
             "#" +
-            user.discriminator +
-            ` was not given role ${reaction.emoji.name}`,
+            user.user.discriminator +
+            ` was not given pronoun ${reaction.emoji.name} ${pronouns}`,
           e
         );
       }
