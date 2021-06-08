@@ -38,9 +38,9 @@ exports.loggerError = async (errorMessage, error) => {
   logger.error(errorMessage);
   logger.error(error);
   //prod
-  // webhook.send("<@&815429572891770901>" + errorMessage).catch(console.error);
+  webhook.send("<@&815429572891770901>" + errorMessage).catch(console.error);
   //dev
-  webhook.send("<@&804262550110994433> " + errorMessage).catch(console.error);
+  //webhook.send("<@&804262550110994433> " + errorMessage).catch(console.error);
 };
 
 exports.logReactionRequest = async (user, role) => {

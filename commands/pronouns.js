@@ -2,10 +2,9 @@ const Discord = require("discord.js");
 const { loggerInfo, loggerError } = require("../utils/logging.js");
 
 //prod
-// const rolesChannelID = "850180171923062785";
-
+const rolesChannelID = "850180171923062785";
 //dev
-const rolesChannelID = "756050285842923561";
+// const rolesChannelID = "756050285842923561";
 
 const reactionRolesMapping = new Map([
   ["💖", "(she/her)"],
