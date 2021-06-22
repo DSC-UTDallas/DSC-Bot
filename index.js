@@ -1,12 +1,19 @@
 require("dotenv").config();
 const { loggerInfo, loggerError } = require("./utils/logging.js");
 const { checkPermissions } = require("./utils/permissions");
-const { sendRulesReaction, addRole } = require("./commands/react-role");
+const {
+  sendRulesReaction,
+  sendRolesReaction,
+  addRole,
+} = require("./commands/react-role");
+const { sendPronounsReaction, addPronoun } = require("./commands/pronouns");
 const { addIdea, getIdeas, deleteIdea } = require("./commands/agenda");
 const { addTodo, getTodo, deleteTodo } = require("./commands/todo");
 const { sendMessage, sendDM } = require("./commands/message");
 const { setStream, stopStream } = require("./commands/stream");
 const { sendCommands } = require("./commands/help");
+const { sendQOTD } = require("./commands/qotd");
+const { sendInfo, sendOfficers, deleteMessages } = require("./commands/info");
 const Discord = require("discord.js");
 const client = new Discord.Client({
   partials: ["MESSAGE", "CHANNEL", "REACTION"],
@@ -52,7 +59,15 @@ client.on("message", async (msg) => {
   }
 
   if (message.startsWith("!rules")) {
-    if (checkPermissions(msg, "Officers")) sendRulesReaction(msg);
+    if (checkPermissions(msg, "Developers")) sendRulesReaction(client, msg);
+  }
+
+  if (message.startsWith("!roles")) {
+    if (checkPermissions(msg, "Developers")) sendRolesReaction(client, msg);
+  }
+
+  if (message.startsWith("!pronouns")) {
+    if (checkPermissions(msg, "Developers")) sendPronounsReaction(client, msg);
   }
 
   if (message.startsWith("!message")) {
@@ -66,6 +81,25 @@ client.on("message", async (msg) => {
   if (message.startsWith("!stopstream")) {
     if (checkPermissions(msg, "Officers")) stopStream(client, msg);
   }
+
+  if (message.startsWith("!qotd")) {
+    if (checkPermissions(msg, "Officers")) sendQOTD(client, msg);
+  }
+
+  if (message.startsWith("!clubinfo")) {
+    if (checkPermissions(msg, "Developers")) sendInfo(client, msg);
+  }
+
+  if (message.startsWith("!officers")) {
+    if (checkPermissions(msg, "Developers")) sendOfficers(client, msg);
+  }
+
+  if (message.startsWith("!deleteofficers")) {
+    if (checkPermissions(msg, "Developers")) deleteMessages(client, msg);
+  }
+
+  // if (msg.type === "PINS_ADD" && msg.channel.id === "756050285842923561")
+  //   msg.delete();
 
   //HIDDEN COMMANDS
   if (message.startsWith("!pizza")) {
@@ -93,9 +127,13 @@ client.on("message", async (msg) => {
 client.on("messageReactionAdd", async (reaction, user) => {
   try {
     addRole(reaction, user);
+    addPronoun(reaction, user);
   } catch (e) {
     loggerError(
-      user.username + "#" + user.discriminator + " was not given role Member",
+      user.username +
+        "#" +
+        user.discriminator +
+        ` was not given role ${reaction}`,
       e
     );
   }
