@@ -1,6 +1,6 @@
 [
   {
-    "position": "Technical Lead",
+    "position": "Lead / President",
     "name": "Saloni Shivdasani",
     "photo": "https://storage.googleapis.com/dscutd-officers/saloni.jpg",
     "major": "Software Engineering, Senior",
@@ -8,115 +8,67 @@
     "id": "512124704463519756"
   },
   {
-    "position": "Developer, Technical Committee",
+    "position": "Vice President",
+    "name": "Megan Tran",
+    "photo": "https://storage.googleapis.com/dscutd-officers/megan.jpg",
+    "major": "Computer Science, Graduate",
+    "fun_fact": "I'm a cosplayer",
+    "id": "224401305169297419"
+  },
+  {
+    "position": "Event Planning Lead",
+    "name": "Bryant Hou",
+    "photo": "https://storage.googleapis.com/dscutd-officers/bryant.jpg",
+    "major": "Computer Science, Junior",
+    "fun_fact": "Recently I've been really interested in investing, especially cryptocurrencies.",
+    "id": "585239987121815626"
+  },
+  {
+    "position": "Event Committee, Social Media Coordinator",
+    "name": "Nancy Hau",
+    "photo": "https://storage.googleapis.com/dscutd-officers/default.png",
+    "major": "Computer Science, Junior",
+    "fun_fact": "I've switched majors 4 times up until now but I plan on sticking this one out :)",
+    "id": "694647540775256216"
+  },
+  {
+    "position": "Event Committee, Discord Coordinator",
+    "name": "Vedha Jonnada",
+    "photo": "https://storage.googleapis.com/dscutd-officers/vedha.jpeg",
+    "major": "Electrical Engineering, Junior",
+    "fun_fact": "I love doing henna!",
+    "id": "624727966647320577"
+  },
+  {
+    "position": "Technical Committee, Developer",
     "name": "Reshmi Ranjith",
-    "photo": "https://storage.googleapis.com/dscutd-officers/saloni.jpg",
+    "photo": "https://storage.googleapis.com/dscutd-officers/reshmi.jpg",
     "major": "Software Engineering, Graduate",
-    "fun_fact": "is a hoe",
+    "fun_fact": "In my free time I'm either watching Netflix, on TikTok, or doing something random like diamond painting or doing a puzzle.",
     "id": "468644032143425539"
   },
   {
-    "position": "Test Officer",
-    "name": "Saloni Shivdasani",
-    "photo": "https://storage.googleapis.com/dscutd-officers/saloni.jpg",
-    "major": "Software Engineering, Senior",
-    "fun_fact": "I am a big fan of GongCha, Chipotle, Drag Race and Shonda Rhimes's shows!",
-    "id": "512124704463519756"
+    "position": "Technical Committee",
+    "name": "Nirranjan Akilan",
+    "photo": "https://storage.googleapis.com/dscutd-officers/nirranjan.JPG",
+    "major": "Computer Science, Sophomore",
+    "fun_fact": "I am a big car enthusiast.",
+    "id": "626802413667352576"
   },
   {
-    "position": "Test Officer",
-    "name": "Saloni Shivdasani",
-    "photo": "https://storage.googleapis.com/dscutd-officers/saloni.jpg",
-    "major": "Software Engineering, Senior",
-    "fun_fact": "I am a big fan of GongCha, Chipotle, Drag Race and Shonda Rhimes's shows!",
-    "id": "512124704463519756"
+    "position": "Technical Committee",
+    "name": "Jariel	Gojar",
+    "photo": "https://storage.googleapis.com/dscutd-officers/default.png",
+    "major": "Computer Science, Graduate",
+    "fun_fact": "I am a new officer at DSC",
+    "id": "668961779182731316"
   },
   {
-    "position": "Test Officer",
-    "name": "Saloni Shivdasani",
-    "photo": "https://storage.googleapis.com/dscutd-officers/saloni.jpg",
-    "major": "Software Engineering, Senior",
-    "fun_fact": "I am a big fan of GongCha, Chipotle, Drag Race and Shonda Rhimes's shows!",
-    "id": "512124704463519756"
-  },
-  {
-    "position": "Test Officer",
-    "name": "Saloni Shivdasani",
-    "photo": "https://storage.googleapis.com/dscutd-officers/saloni.jpg",
-    "major": "Software Engineering, Senior",
-    "fun_fact": "I am a big fan of GongCha, Chipotle, Drag Race and Shonda Rhimes's shows!",
-    "id": "512124704463519756"
-  },
-  {
-    "position": "Test Officer",
-    "name": "Saloni Shivdasani",
-    "photo": "https://storage.googleapis.com/dscutd-officers/saloni.jpg",
-    "major": "Software Engineering, Senior",
-    "fun_fact": "I am a big fan of GongCha, Chipotle, Drag Race and Shonda Rhimes's shows!",
-    "id": "512124704463519756"
-  },
-  {
-    "position": "Test Officer",
-    "name": "Saloni Shivdasani",
-    "photo": "https://storage.googleapis.com/dscutd-officers/saloni.jpg",
-    "major": "Software Engineering, Senior",
-    "fun_fact": "I am a big fan of GongCha, Chipotle, Drag Race and Shonda Rhimes's shows!",
-    "id": "512124704463519756"
-  },
-  {
-    "position": "Test Officer",
-    "name": "Saloni Shivdasani",
-    "photo": "https://storage.googleapis.com/dscutd-officers/saloni.jpg",
-    "major": "Software Engineering, Senior",
-    "fun_fact": "I am a big fan of GongCha, Chipotle, Drag Race and Shonda Rhimes's shows!",
-    "id": "512124704463519756"
-  },
-  {
-    "position": "Test Officer",
-    "name": "Saloni Shivdasani",
-    "photo": "https://storage.googleapis.com/dscutd-officers/saloni.jpg",
-    "major": "Software Engineering, Senior",
-    "fun_fact": "I am a big fan of GongCha, Chipotle, Drag Race and Shonda Rhimes's shows!",
-    "id": "512124704463519756"
-  },
-  {
-    "position": "Test Officer",
-    "name": "Saloni Shivdasani",
-    "photo": "https://storage.googleapis.com/dscutd-officers/saloni.jpg",
-    "major": "Software Engineering, Senior",
-    "fun_fact": "I am a big fan of GongCha, Chipotle, Drag Race and Shonda Rhimes's shows!",
-    "id": "512124704463519756"
-  },
-  {
-    "position": "Test Officer",
-    "name": "Saloni Shivdasani",
-    "photo": "https://storage.googleapis.com/dscutd-officers/saloni.jpg",
-    "major": "Software Engineering, Senior",
-    "fun_fact": "I am a big fan of GongCha, Chipotle, Drag Race and Shonda Rhimes's shows!",
-    "id": "512124704463519756"
-  },
-  {
-    "position": "Test Officer",
-    "name": "Saloni Shivdasani",
-    "photo": "https://storage.googleapis.com/dscutd-officers/saloni.jpg",
-    "major": "Software Engineering, Senior",
-    "fun_fact": "I am a big fan of GongCha, Chipotle, Drag Race and Shonda Rhimes's shows!",
-    "id": "512124704463519756"
-  },
-  {
-    "position": "Test Officer",
-    "name": "Saloni Shivdasani",
-    "photo": "https://storage.googleapis.com/dscutd-officers/saloni.jpg",
-    "major": "Software Engineering, Senior",
-    "fun_fact": "I am a big fan of GongCha, Chipotle, Drag Race and Shonda Rhimes's shows!",
-    "id": "512124704463519756"
-  },
-  {
-    "position": "Test Officer",
-    "name": "Saloni Shivdasani",
-    "photo": "https://storage.googleapis.com/dscutd-officers/saloni.jpg",
-    "major": "Software Engineering, Senior",
-    "fun_fact": "I am a big fan of GongCha, Chipotle, Drag Race and Shonda Rhimes's shows!",
-    "id": "512124704463519756"
+    "position": "Technical Committee",
+    "name": "Poonam	Siyag",
+    "photo": "https://storage.googleapis.com/dscutd-officers/default.png",
+    "major": "Cyber Security, Technology and Policy, Graduate",
+    "fun_fact": "I started microblogging; wrote book reviews. ",
+    "id": "844417609344221184"
   }
 ]
