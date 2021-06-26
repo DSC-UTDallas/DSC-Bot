@@ -63,7 +63,7 @@ exports.sendRolesReaction = async (client, msg) => {
     .setTitle("Role Notifications")
     .setColor(0x2b85d3)
     .setDescription(
-      `React with certain emojis to gain certain roles to get notifications!
+      `React with certain emojis to gain certain roles to get notifications! Make sure to react to the rules to get access to these notifications!
       🥳 Partner Events
       ❓ QOTW
       💫 Weekly Fun Facts`
