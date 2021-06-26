@@ -25,6 +25,11 @@ const logger = bunyan.createLogger({
   ],
 });
 
+const id = process.env.log_webhook_id;
+const token = process.env.log_webhook_token;
+
+const webhook = new Discord.WebhookClient(id, token);
+
 exports.loggerInfo = async (infoMessage) => {
   logger.info(infoMessage);
 };
@@ -32,4 +37,16 @@ exports.loggerInfo = async (infoMessage) => {
 exports.loggerError = async (errorMessage, error) => {
   logger.error(errorMessage);
   logger.error(error);
+  //prod
+  webhook.send("<@&815429572891770901>" + errorMessage).catch(console.error);
+  //dev
+  //webhook.send("<@&804262550110994433> " + errorMessage).catch(console.error);
+};
+
+exports.logReactionRequest = async (user, role) => {
+  webhook.send(`${user} reacted to get role ${role}`).catch(console.error);
+};
+
+exports.logReactionSuccess = async (user, role) => {
+  webhook.send(`${user} got role ${role}`).catch(console.error);
 };
