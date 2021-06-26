@@ -1,5 +1,10 @@
 const Discord = require("discord.js");
-const { loggerInfo, loggerError } = require("../utils/logging.js");
+const {
+  loggerInfo,
+  loggerError,
+  logReactionRequest,
+  logReactionSuccess,
+} = require("../utils/logging.js");
 const fs = require("fs");
 const path = require("path");
 
@@ -59,7 +64,7 @@ exports.sendRolesReaction = async (client, msg) => {
     .setTitle("Role Notifications")
     .setColor(0x2b85d3)
     .setDescription(
-      `React with certain emojis to gain certain roles to get notifications!
+      `React with certain emojis to gain certain roles to get notifications! Make sure to react to the rules to get access to these notifications!
       🥳 Partner Events
       ❓ QOTW
       💫 Weekly Fun Facts`
@@ -85,11 +90,14 @@ exports.addRole = async (reaction, user) => {
     if (reactionRolesMapping.has(reaction.emoji.name)) {
       try {
         user = await reaction.message.guild.members.cache.get(user.id);
+        //loggerInfo(user);
+        logReactionRequest(user, reaction.emoji.name);
         reactionID = reactionRolesMapping.get(reaction.emoji.name);
         if (user.roles.cache.find((r) => r.id === reactionID)) {
           user.roles.remove(reactionID);
         } else {
           user.roles.add(reactionID);
+          logReactionSuccess(user, reaction.emoji.name);
         }
         reaction.message.reactions.cache // remove reaction from the message
           .find((r) => r.emoji.name == reaction.emoji.name)
