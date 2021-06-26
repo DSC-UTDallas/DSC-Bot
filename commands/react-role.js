@@ -1,9 +1,9 @@
 const Discord = require("discord.js");
-const { loggerInfo, loggerError } = require("../utils/logging.js");
 const {
+  loggerInfo,
+  loggerError,
   logReactionRequest,
-  logReactionSuccess,
-} = require("../utils/reaction_logging");
+} = require("../utils/logging.js");
 const fs = require("fs");
 const path = require("path");
 
@@ -47,9 +47,18 @@ exports.addRole = async (reaction, user) => {
         //   .get(user.id)
         //   .roles.add(memberRoleID);
         user = await reaction.message.guild.members.cache.get(user.id);
-        logReactionRequest(user, "Member");
-        user.roles.add(memberRoleID);
-        logReactionSuccess(user, "Member");
+        loggerInfo(user);
+        logReactionRequest(user, reaction.emoji.name);
+        reactionID = reactionRolesMapping.get(reaction.emoji.name);
+        if (user.roles.cache.find((r) => r.id === reactionID)) {
+          user.roles.remove(reactionID);
+        } else {
+          user.roles.add(reactionID);
+          logReactionSuccess(user, reaction.emoji.name);
+        }
+        reaction.message.reactions.cache // remove reaction from the message
+          .find((r) => r.emoji.name == reaction.emoji.name)
+          .users.remove(user);
         loggerInfo(
           user.username + "#" + user.discriminator + " was given role Member"
         );
