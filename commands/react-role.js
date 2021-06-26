@@ -3,6 +3,7 @@ const {
   loggerInfo,
   loggerError,
   logReactionRequest,
+  logReactionSuccess,
 } = require("../utils/logging.js");
 const fs = require("fs");
 const path = require("path");
@@ -89,7 +90,7 @@ exports.addRole = async (reaction, user) => {
     if (reactionRolesMapping.has(reaction.emoji.name)) {
       try {
         user = await reaction.message.guild.members.cache.get(user.id);
-        loggerInfo(user);
+        //loggerInfo(user);
         logReactionRequest(user, reaction.emoji.name);
         reactionID = reactionRolesMapping.get(reaction.emoji.name);
         if (user.roles.cache.find((r) => r.id === reactionID)) {
