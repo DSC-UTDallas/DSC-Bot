@@ -58,17 +58,17 @@ client.on("message", async (msg) => {
     if (checkPermissions(msg, team)) deleteTodo(msg, messageDetails);
   }
 
-  if (message.startsWith("!rules")) {
-    if (checkPermissions(msg, "Developers")) sendRulesReaction(client, msg);
-  }
+//   if (message.startsWith("!rules")) {
+//     if (checkPermissions(msg, "Developers")) sendRulesReaction(client, msg);
+//   }
 
-  if (message.startsWith("!roles")) {
-    if (checkPermissions(msg, "Developers")) sendRolesReaction(client, msg);
-  }
+//   if (message.startsWith("!roles")) {
+//     if (checkPermissions(msg, "Developers")) sendRolesReaction(client, msg);
+//   }
 
-  if (message.startsWith("!pronouns")) {
-    if (checkPermissions(msg, "Developers")) sendPronounsReaction(client, msg);
-  }
+//   if (message.startsWith("!pronouns")) {
+//     if (checkPermissions(msg, "Developers")) sendPronounsReaction(client, msg);
+//   }
 
   if (message.startsWith("!message")) {
     if (checkPermissions(msg, "Officers")) sendMessage(msg, client);
