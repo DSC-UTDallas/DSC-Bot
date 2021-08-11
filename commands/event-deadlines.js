@@ -7,6 +7,7 @@ exports.getEventDeadlines = async (client, msg) => {
   var relevantEvents = [];
 
   var today = new Date();
+  today.setHours(0, 0, 0, 0);
   today.setDate(today.getDate());
 
   events.forEach((event) => {
@@ -29,7 +30,22 @@ exports.getEventDeadlines = async (client, msg) => {
     }
   });
 
-  console.log(relevantEvents);
+  // console.log(relevantEvents);
+
+  relevantEvents.forEach((event) => {
+    // console.log(event.deadlines);
+    var deadlines = event.deadlines;
+    var eventName = event.name;
+
+    deadlines.forEach((deadline) => {
+      var deadlineDate = new Date(deadline.due.toDate());
+      deadlineDate.setHours(0, 0, 0, 0);
+      if (today.getDate() == deadlineDate.getDate()) {
+        console.log("event name", eventName);
+        console.log(deadline);
+      }
+    });
+  });
 
   msg.react("👍");
 };
