@@ -2,7 +2,14 @@ const Discord = require("discord.js");
 const { loggerInfo, loggerError } = require("../utils/logging.js");
 const { GETevents } = require("../utils/firebase");
 
-exports.getEventDeadlines = async (client, msg) => {
+//exports.getEventDeadlines = async (client, msg) => {
+exports.getEventDeadlines = async () => {
+  // const webhook = new Discord.WebhookClient(id, token);
+  const webhook = new Discord.WebhookClient(
+    "874830853103026187",
+    "Fwnx-MkNWZd-IY-CBZXDQ9G-jMDfeO20QHdWir40vgqAIwYXtSenvPWNTu1YbXxbqb2F"
+  );
+
   const events = await GETevents();
   var relevantEvents = [];
 
@@ -44,12 +51,17 @@ exports.getEventDeadlines = async (client, msg) => {
         // console.log("event name", eventName);
         // console.log(deadline);
         var roleMention = "<@&" + deadline.officer.toString() + ">";
-        msg.channel.send(
-          `${roleMention} ${deadline.todo} for ${eventName} is due today!`
-        );
+        // msg.channel.send(
+        //   `${roleMention} ${deadline.todo} for ${eventName} is due today!`
+        // );
+        webhook
+          .send(
+            `${roleMention} ${deadline.todo} for ${eventName} is due today!`
+          )
+          .catch(console.error);
       }
     });
   });
 
-  msg.react("👍");
+  // msg.react("👍");
 };
