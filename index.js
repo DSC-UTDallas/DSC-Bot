@@ -16,6 +16,7 @@ const { sendQOTD } = require("./commands/qotd");
 const { sendInfo, sendOfficers, deleteMessages } = require("./commands/info");
 const { getEventDeadlines } = require("./commands/event-deadlines");
 const Discord = require("discord.js");
+var cron = require("node-cron");
 const client = new Discord.Client({
   partials: ["MESSAGE", "CHANNEL", "REACTION"],
 });
@@ -24,6 +25,17 @@ client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
   client.user.setActivity("!help", { type: "LISTENING" });
 });
+
+cron.schedule(
+  "0 0 * * *",
+  () => {
+    getEventDeadlines();
+  },
+  {
+    scheduled: true,
+    timezone: "America/Chicago",
+  }
+);
 
 client.on("message", async (msg) => {
   const message = msg.content.toLowerCase();
@@ -100,7 +112,7 @@ client.on("message", async (msg) => {
   }
 
   if (message.startsWith("!events")) {
-    if (checkPermissions(msg, "Officers")) getEventDeadlines(client, msg);
+    if (checkPermissions(msg, "Officers")) getEventDeadlines();
   }
 
   // if (msg.type === "PINS_ADD" && msg.channel.id === "756050285842923561")
