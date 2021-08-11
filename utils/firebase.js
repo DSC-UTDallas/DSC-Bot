@@ -27,6 +27,20 @@ exports.GETagenda = async (emoji) => {
   return agenda;
 };
 
+exports.GETevents = async (emoji) => {
+  var events = [];
+
+  await db
+    .collection("events")
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        events.push(doc.data());
+      });
+    });
+  return events;
+};
+
 exports.GETtodo = async (team, emoji) => {
   var agenda = [];
   await db
