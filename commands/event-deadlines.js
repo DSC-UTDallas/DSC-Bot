@@ -41,8 +41,12 @@ exports.getEventDeadlines = async (client, msg) => {
       var deadlineDate = new Date(deadline.due.toDate());
       deadlineDate.setHours(0, 0, 0, 0);
       if (today.getDate() == deadlineDate.getDate()) {
-        console.log("event name", eventName);
-        console.log(deadline);
+        // console.log("event name", eventName);
+        // console.log(deadline);
+        var roleMention = "<@&" + deadline.officer.toString() + ">";
+        msg.channel.send(
+          `${roleMention} ${deadline.todo} for ${eventName} is due today!`
+        );
       }
     });
   });
