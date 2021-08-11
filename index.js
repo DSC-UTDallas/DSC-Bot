@@ -14,6 +14,7 @@ const { setStream, stopStream } = require("./commands/stream");
 const { sendCommands } = require("./commands/help");
 const { sendQOTD } = require("./commands/qotd");
 const { sendInfo, sendOfficers, deleteMessages } = require("./commands/info");
+const { getEventDeadlines } = require("./commands/event-deadlines");
 const Discord = require("discord.js");
 const client = new Discord.Client({
   partials: ["MESSAGE", "CHANNEL", "REACTION"],
@@ -58,17 +59,17 @@ client.on("message", async (msg) => {
     if (checkPermissions(msg, team)) deleteTodo(msg, messageDetails);
   }
 
-//   if (message.startsWith("!rules")) {
-//     if (checkPermissions(msg, "Developers")) sendRulesReaction(client, msg);
-//   }
+  //   if (message.startsWith("!rules")) {
+  //     if (checkPermissions(msg, "Developers")) sendRulesReaction(client, msg);
+  //   }
 
-//   if (message.startsWith("!roles")) {
-//     if (checkPermissions(msg, "Developers")) sendRolesReaction(client, msg);
-//   }
+  //   if (message.startsWith("!roles")) {
+  //     if (checkPermissions(msg, "Developers")) sendRolesReaction(client, msg);
+  //   }
 
-//   if (message.startsWith("!pronouns")) {
-//     if (checkPermissions(msg, "Developers")) sendPronounsReaction(client, msg);
-//   }
+  //   if (message.startsWith("!pronouns")) {
+  //     if (checkPermissions(msg, "Developers")) sendPronounsReaction(client, msg);
+  //   }
 
   if (message.startsWith("!message")) {
     if (checkPermissions(msg, "Officers")) sendMessage(msg, client);
@@ -96,6 +97,10 @@ client.on("message", async (msg) => {
 
   if (message.startsWith("!deleteofficers")) {
     if (checkPermissions(msg, "Developers")) deleteMessages(client, msg);
+  }
+
+  if (message.startsWith("!events")) {
+    if (checkPermissions(msg, "Officers")) getEventDeadlines(client, msg);
   }
 
   // if (msg.type === "PINS_ADD" && msg.channel.id === "756050285842923561")
