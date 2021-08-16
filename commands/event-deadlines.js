@@ -67,15 +67,33 @@ exports.getEventDeadlines = async () => {
 };
 
 // addEvent YYYY-MM-DD eventName
-//exports.addEventDeadlines = async (client, msg) => {
 exports.addEventDeadlines = async (client, msg) => {
   var content = msg.content.substr(msg.content.indexOf(" ") + 1);
   var eventDate = content.split(" ")[0];
   eventDate = new Date(eventDate);
   var eventName = content.substr(content.indexOf(" ") + 1);
 
+  const eventLead = "";
+  const eventCommittee = "";
+  const financialLead = "";
+
   var roomBookDue = new Date(eventDate);
-  roomBookDue.setDate(eventDate.getDate() - 31);
+  roomBookDue.setDate(eventDate.getDate() - 24);
+
+  var flyerDue = new Date(eventDate);
+  flyerDue.setDate(eventDate.getDate() - 16);
+
+  var programmingFundsDue = new Date(eventDate);
+  programmingFundsDue.setDate(eventDate.getDate() - 15);
+
+  var flyerRequestDue = new Date(eventDate);
+  flyerRequestDue.setDate(eventDate.getDate() - 15);
+
+  var reimburesementDue = new Date(eventDate);
+  reimburesementDue.setDate(eventDate.getDate() + 5);
+
+  var postEventDue = new Date(eventDate);
+  postEventDue.setDate(eventDate.getDate() + 5);
 
   const deadlines = {
     date: eventDate,
@@ -83,15 +101,37 @@ exports.addEventDeadlines = async (client, msg) => {
     deadlines: [
       {
         due: roomBookDue,
-        officer: "815429572891770901",
+        officer: eventLead,
         todo: "Room Booking",
+      },
+      {
+        due: flyerDue,
+        officer: eventCommittee,
+        todo: "Final Flyer Design",
+      },
+      {
+        due: programmingFundsDue,
+        officer: financialLead,
+        todo: "Programming Funds Form",
+      },
+      {
+        due: flyerRequestDue,
+        officer: eventLead,
+        todo: "SOC Flyer Request",
+      },
+      {
+        due: reimburesementDue,
+        officer: financialLead,
+        todo: "Reimbursement Form",
+      },
+      {
+        due: postEventDue,
+        officer: eventLead,
+        todo: "Post  Event Evaluation Form",
       },
     ],
   };
 
   addEvent(deadlines);
-
-  console.log(deadlines);
-
   msg.react("👍");
 };
