@@ -41,6 +41,18 @@ exports.GETevents = async (emoji) => {
   return events;
 };
 
+exports.addEvent = async (deadlines) => {
+  await db
+    .collection("events")
+    .add(deadlines)
+    .then(function (docRef) {
+      //console.log("Document written");
+    })
+    .catch(function (error) {
+      //console.error("Error adding document: ", error);
+    });
+};
+
 exports.GETtodo = async (team, emoji) => {
   var agenda = [];
   await db
