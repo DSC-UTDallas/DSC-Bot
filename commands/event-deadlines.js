@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const { loggerInfo, loggerError } = require("../utils/logging.js");
-const { GETevents } = require("../utils/firebase");
+const { GETevents, addEvent } = require("../utils/firebase");
 
 //exports.getEventDeadlines = async (client, msg) => {
 exports.getEventDeadlines = async () => {
@@ -64,4 +64,34 @@ exports.getEventDeadlines = async () => {
   });
 
   // msg.react("👍");
+};
+
+// addEvent YYYY-MM-DD eventName
+//exports.addEventDeadlines = async (client, msg) => {
+exports.addEventDeadlines = async (client, msg) => {
+  var content = msg.content.substr(msg.content.indexOf(" ") + 1);
+  var eventDate = content.split(" ")[0];
+  eventDate = new Date(eventDate);
+  var eventName = content.substr(content.indexOf(" ") + 1);
+
+  var roomBookDue = new Date(eventDate);
+  roomBookDue.setDate(eventDate.getDate() - 31);
+
+  const deadlines = {
+    date: eventDate,
+    name: eventName,
+    deadlines: [
+      {
+        due: roomBookDue,
+        officer: "815429572891770901",
+        todo: "Room Booking",
+      },
+    ],
+  };
+
+  addEvent(deadlines);
+
+  console.log(deadlines);
+
+  msg.react("👍");
 };
