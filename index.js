@@ -14,7 +14,10 @@ const { setStream, stopStream } = require("./commands/stream");
 const { sendCommands } = require("./commands/help");
 const { sendQOTD } = require("./commands/qotd");
 const { sendInfo, sendOfficers, deleteMessages } = require("./commands/info");
-const { getEventDeadlines } = require("./commands/event-deadlines");
+const {
+  getEventDeadlines,
+  addEventDeadlines,
+} = require("./commands/event-deadlines");
 const Discord = require("discord.js");
 var cron = require("node-cron");
 const client = new Discord.Client({
@@ -112,7 +115,11 @@ client.on("message", async (msg) => {
   }
 
   if (message.startsWith("!events")) {
-    if (checkPermissions(msg, "Officers")) getEventDeadlines();
+    if (checkPermissions(msg, "Developers")) getEventDeadlines();
+  }
+
+  if (message.startsWith("!event")) {
+    if (checkPermissions(msg, "Officers")) addEventDeadlines(client, msg);
   }
 
   // if (msg.type === "PINS_ADD" && msg.channel.id === "756050285842923561")
