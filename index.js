@@ -30,7 +30,7 @@ client.on("ready", () => {
 });
 
 cron.schedule(
-  "0 12 * * *",
+  "45 18 * * *",
   () => {
     getEventDeadlines();
   },

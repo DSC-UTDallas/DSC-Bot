@@ -6,8 +6,8 @@ const { GETevents, addEvent } = require("../utils/firebase");
 exports.getEventDeadlines = async () => {
   // const webhook = new Discord.WebhookClient(id, token);
   const webhook = new Discord.WebhookClient(
-    "874830853103026187",
-    "Fwnx-MkNWZd-IY-CBZXDQ9G-jMDfeO20QHdWir40vgqAIwYXtSenvPWNTu1YbXxbqb2F"
+    process.env.deadline_webhook_id,
+    process.env.deadline_webhook_token
   );
 
   const events = await GETevents();
@@ -71,20 +71,22 @@ exports.addEventDeadlines = async (client, msg) => {
   var content = msg.content.substr(msg.content.indexOf(" ") + 1);
   var eventDate = content.split(" ")[0];
   eventDate = new Date(eventDate);
+  eventDate.setDate(eventDate.getDate() + 1);
   var eventName = content.substr(content.indexOf(" ") + 1);
 
-  const eventLead = "";
-  const eventCommittee = "";
-  const financialLead = "";
+  const eventLead = "656976873926033422";
+  const eventCommittee = "720137870647492669";
+  const financialLead = "656976951143301166";
+  const adminLead = "679809964046417960";
 
   var roomBookDue = new Date(eventDate);
   roomBookDue.setDate(eventDate.getDate() - 24);
 
   var flyerDue = new Date(eventDate);
-  flyerDue.setDate(eventDate.getDate() - 16);
+  flyerDue.setDate(eventDate.getDate() - 22);
 
   var programmingFundsDue = new Date(eventDate);
-  programmingFundsDue.setDate(eventDate.getDate() - 15);
+  programmingFundsDue.setDate(eventDate.getDate() - 21);
 
   var flyerRequestDue = new Date(eventDate);
   flyerRequestDue.setDate(eventDate.getDate() - 15);
@@ -126,8 +128,8 @@ exports.addEventDeadlines = async (client, msg) => {
       },
       {
         due: postEventDue,
-        officer: eventLead,
-        todo: "Post  Event Evaluation Form",
+        officer: adminLead,
+        todo: "Post Event Evaluation Form",
       },
     ],
   };
