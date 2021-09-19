@@ -89,11 +89,12 @@ exports.addRole = async (reaction, user) => {
   ) {
     if (reactionRolesMapping.has(reaction.emoji.name)) {
       try {
-        user = await reaction.message.guild.members.cache.get(user.id);
+        // user = await reaction.message.guild.members.cache.get(user.id);
         //loggerInfo(user);
         logReactionRequest(user, reaction.emoji.name);
         reactionID = reactionRolesMapping.get(reaction.emoji.name);
-        if (user.roles.cache.find((r) => r.id === reactionID)) {
+        console.log(user);
+        if (user.roles.find((r) => r.id === reactionID)) {
           user.roles.remove(reactionID);
         } else {
           user.roles.add(reactionID);

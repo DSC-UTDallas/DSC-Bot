@@ -78,13 +78,13 @@ client.on("message", async (msg) => {
   //     if (checkPermissions(msg, "Developers")) sendRulesReaction(client, msg);
   //   }
 
-  //   if (message.startsWith("!roles")) {
-  //     if (checkPermissions(msg, "Developers")) sendRolesReaction(client, msg);
-  //   }
+  // if (message.startsWith("!roles")) {
+  //   if (checkPermissions(msg, "Developers")) sendRolesReaction(client, msg);
+  // }
 
-  //   if (message.startsWith("!pronouns")) {
-  //     if (checkPermissions(msg, "Developers")) sendPronounsReaction(client, msg);
-  //   }
+  // if (message.startsWith("!pronouns")) {
+  //   if (checkPermissions(msg, "Developers")) sendPronounsReaction(client, msg);
+  // }
 
   if (message.startsWith("!message")) {
     if (checkPermissions(msg, "Officers")) sendMessage(msg, client);
@@ -148,19 +148,19 @@ client.on("message", async (msg) => {
   }
 });
 
-client.on("messageReactionAdd", async (reaction, user) => {
-  try {
-    addRole(reaction, user);
-    addPronoun(reaction, user);
-  } catch (e) {
-    loggerError(
-      user.username +
-        "#" +
-        user.discriminator +
-        ` was not given role ${reaction}`,
-      e
-    );
-  }
-});
+// client.on("messageReactionAdd", async (reaction, user) => {
+//   try {
+//     addRole(reaction, user);
+//     addPronoun(reaction, user);
+//   } catch (e) {
+//     loggerError(
+//       user.username +
+//         "#" +
+//         user.discriminator +
+//         ` was not given role ${reaction}`,
+//       e
+//     );
+//   }
+// });
 
 client.login(process.env.DISCORD_TOKEN);
