@@ -36,7 +36,7 @@ exports.sendInfo = async (client, msg) => {
 
     const aboutEmbed = new Discord.MessageEmbed()
       .setTitle(
-        "<:dsc:643702453585313822> ** About DSC UTD ** <:dsc:643702453585313822>"
+        "<:dsc:643702453585313822> ** About GDSC UTD ** <:dsc:643702453585313822>"
       )
       .setColor(0x4285f4)
       .setDescription(about);
