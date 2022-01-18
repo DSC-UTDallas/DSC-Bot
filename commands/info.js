@@ -5,9 +5,9 @@ const officers = require("../officers.json");
 exports.sendInfo = async (client, msg) => {
   try {
     //dev
-    const channelID = "756050285842923561";
+    // const channelID = "756050285842923561";
     //prod
-    // const channelID = "841073458719752262";
+    const channelID = "841073458719752262";
     const channel = client.channels.cache.get(channelID);
 
     const about = [
@@ -73,9 +73,9 @@ exports.sendInfo = async (client, msg) => {
 exports.sendOfficers = async (client, msg) => {
   try {
     //dev
-    const channelID = "756050285842923561";
+    // const channelID = "756050285842923561";
     //prod
-    // const channelID = "843693564650061844";
+    const channelID = "843693564650061844";
     const channel = client.channels.cache.get(channelID);
 
     const embed = new Discord.MessageEmbed()
@@ -116,9 +116,9 @@ exports.sendOfficers = async (client, msg) => {
 
 exports.deleteMessages = async (client, msg) => {
   //dev
-  const channelID = "756050285842923561";
+  // const channelID = "756050285842923561";
   //prod
-  // const channelID = "843693564650061844";
+  const channelID = "843693564650061844";
   const channel = client.channels.cache.get(channelID);
 
   const fetched = await channel.messages.fetch();
