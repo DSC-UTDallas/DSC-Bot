@@ -1,12 +1,6 @@
 require("dotenv").config();
 const { loggerInfo, loggerError } = require("./utils/logging.js");
 const { checkPermissions } = require("./utils/permissions");
-const {
-  sendRulesReaction,
-  sendRolesReaction,
-  addRole,
-} = require("./commands/react-role");
-const { sendPronounsReaction, addPronoun } = require("./commands/pronouns");
 const { addIdea, getIdeas, deleteIdea } = require("./commands/agenda");
 const { addTodo, getTodo, deleteTodo } = require("./commands/todo");
 const { sendMessage, sendDM } = require("./commands/message");
@@ -45,18 +39,10 @@ client.on("message", async (msg) => {
 
   if (message.startsWith("!help")) sendCommands(msg);
 
-  if (message.startsWith("!addidea")) {
-    if (checkPermissions(msg, "Officers")) addIdea(msg);
-  }
-
   if (message.startsWith("!addtodo")) {
     const messageDetails = message.substr(message.indexOf(" ") + 1);
     const team = messageDetails.split(" ")[0];
     if (checkPermissions(msg, team)) addTodo(msg, messageDetails);
-  }
-
-  if (message.startsWith("!ideas")) {
-    if (checkPermissions(msg, "Officers")) getIdeas(msg);
   }
 
   if (message.startsWith("!todo")) {
@@ -64,27 +50,11 @@ client.on("message", async (msg) => {
     if (checkPermissions(msg, team)) getTodo(msg, team);
   }
 
-  if (message.startsWith("!removeidea")) {
-    if (checkPermissions(msg, "Officers")) deleteIdea(msg);
-  }
-
   if (message.startsWith("!removetodo")) {
     const messageDetails = message.substr(message.indexOf(" ") + 1);
     const team = messageDetails.split(" ")[0];
     if (checkPermissions(msg, team)) deleteTodo(msg, messageDetails);
   }
-
-  //   if (message.startsWith("!rules")) {
-  //     if (checkPermissions(msg, "Developers")) sendRulesReaction(client, msg);
-  //   }
-
-  //   if (message.startsWith("!roles")) {
-  //     if (checkPermissions(msg, "Developers")) sendRolesReaction(client, msg);
-  //   }
-
-  //   if (message.startsWith("!pronouns")) {
-  //     if (checkPermissions(msg, "Developers")) sendPronounsReaction(client, msg);
-  //   }
 
   if (message.startsWith("!message")) {
     if (checkPermissions(msg, "Officers")) sendMessage(msg, client);
@@ -122,9 +92,6 @@ client.on("message", async (msg) => {
     if (checkPermissions(msg, "Officers")) addEventDeadlines(client, msg);
   }
 
-  // if (msg.type === "PINS_ADD" && msg.channel.id === "756050285842923561")
-  //   msg.delete();
-
   //HIDDEN COMMANDS
   if (message.startsWith("!pizza")) {
     const author = msg.author.username + "#" + msg.author.discriminator;
@@ -145,21 +112,6 @@ client.on("message", async (msg) => {
     });
     msg.channel.send(content.slice(0, content.length).join(" "));
     msg.delete({ timeout: 1000 });
-  }
-});
-
-client.on("messageReactionAdd", async (reaction, user) => {
-  try {
-    addRole(reaction, user);
-    addPronoun(reaction, user);
-  } catch (e) {
-    loggerError(
-      user.username +
-        "#" +
-        user.discriminator +
-        ` was not given role ${reaction}`,
-      e
-    );
   }
 });
 

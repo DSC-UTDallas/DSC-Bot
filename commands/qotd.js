@@ -8,11 +8,11 @@ exports.sendQOTD = async (client, msg) => {
     const question = content.split("|")[1];
 
     //Use 828768969808674836 for production
-    //Use 828768969808674836 for dev
-    const qotdRoleID = "828768969808674836";
+    //Use 828774983001702462 for dev
+    const qotdRoleID = "828774983001702462";
     //Use 841075441212194816 for production
-    //Use "" for dev
-    const channelID = "841075441212194816";
+    //Use 755653627959443532 for dev
+    const channelID = "755653627959443532";
     const channel = client.channels.cache.get(channelID);
 
     channel.send("<@&" + qotdRoleID + ">");

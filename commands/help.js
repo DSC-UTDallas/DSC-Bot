@@ -13,9 +13,9 @@ exports.sendCommands = (msg) => {
   if (msg.member.roles.cache.find((r) => r.name === "Officers")) {
     officerCommands = [
       " \n\n ** Officer Commands **",
-      `${emoji} !ideas: To see the list of ideas and their indexes for next meeting agenda`,
-      `${emoji} !addIdea <idea>: To add an idea for next meeting agenda (each idea will get assigned a random index)`,
-      `${emoji} !removeIdea <idea-index>: To remove the idea from next meeting agenda`,
+      `NOT AVAILABLE - ${emoji} !ideas: To see the list of ideas and their indexes for next meeting agenda`,
+      `NOT AVAILABLE - ${emoji} !addIdea <idea>: To add an idea for next meeting agenda (each idea will get assigned a random index)`,
+      `NOT AVAILABLE - ${emoji} !removeIdea <idea-index>: To remove the idea from next meeting agenda`,
       `${emoji} !message <channelID> <message>: To send a message to a channel`,
       `${emoji} !stream <stream-link> <event-name>: Sets activity to - playing event and shows Twitch link if available`,
       `${emoji} !stopStream: Sets activity - to listening to !help`,
@@ -27,9 +27,9 @@ exports.sendCommands = (msg) => {
   if (msg.member.roles.cache.find((r) => r.name === "Developers")) {
     devCommands = [
       " \n\n ** Developer Commands **",
-      `${emoji} !rules: To send rules and react-role stuff`,
-      `${emoji} !roles: To send roles`,
-      `${emoji} !pronouns: To send pronouns`,
+      `NOT AVAILABLE - ${emoji} !rules: To send rules and react-role stuff`,
+      `NOT AVAILABLE - ${emoji} !roles: To send roles`,
+      `NOT AVAILABLE - ${emoji} !pronouns: To send pronouns`,
       `${emoji} !clubinfo: To send club info`,
       `${emoji} !officers: To send officer info`,
       `${emoji} !deleteofficers: To delete officer info`,
