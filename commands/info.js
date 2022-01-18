@@ -94,11 +94,11 @@ exports.sendOfficers = async (client, msg) => {
     const colors = [0xea4335, 0xfbbc04, 0x34a853, 0x4285f4];
 
     for (index in officers) {
-      officer = officers[index];
+      let officer = officers[index];
       const embed = new Discord.MessageEmbed()
         .setTitle(officer.position)
         .setColor(colors[index % 4])
-        .setDescription("<@!" + officer.id + ">")
+        .setDescription("<@!" + str(officer.id) + ">")
         .setThumbnail(officer.photo)
         .addFields(
           { name: "Major", value: officer.major },
