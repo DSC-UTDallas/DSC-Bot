@@ -19,7 +19,8 @@ exports.sendCommands = (msg) => {
       `${emoji} !message <channelID> <message>: To send a message to a channel`,
       `${emoji} !stream <stream-link> <event-name>: Sets activity to - playing event and shows Twitch link if available`,
       `${emoji} !stopStream: Sets activity - to listening to !help`,
-      `${emoji} !qotd <senderName>|<question>: Sends question to qotd channel and tags senderName before``${emoji} !event YYYY-MM-DD eventName: Adds an event on specified date and send automated reminders for processes`,
+      `${emoji} !qotd <senderName>|<question>: Sends question to qotd channel and tags senderName before`,
+      `${emoji} !event YYYY-MM-DD eventName: Adds an event on specified date and send automated reminders for processes`,
     ];
     commands = commands.concat(officerCommands);
   }
