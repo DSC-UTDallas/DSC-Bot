@@ -98,7 +98,7 @@ exports.sendOfficers = async (client, msg) => {
       const embed = new Discord.MessageEmbed()
         .setTitle(officer.position)
         .setColor(colors[index % 4])
-        .setDescription("<@!" + officer.id + ">")
+        .setDescription(officer.name + " ( <@!" + officer.id + "> )")
         .setThumbnail(officer.photo)
         .addFields(
           { name: "Major", value: officer.major },
