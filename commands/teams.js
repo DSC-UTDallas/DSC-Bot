@@ -6,7 +6,7 @@ exports.createTeams = async (client, msg) => {
   const groupName = details.split(" ")[1];
 
   var role = await msg.guild.roles.create({
-    data: { name: groupName, mentionable: true },
+    data: { name: groupName, mentionable: true, color: "#C1E1C1" },
   });
 
   permissions = [
