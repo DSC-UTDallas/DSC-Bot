@@ -7,6 +7,7 @@ const { sendMessage, sendDM } = require("./commands/message");
 const { setStream, stopStream } = require("./commands/stream");
 const { sendCommands } = require("./commands/help");
 const { sendQOTD } = require("./commands/qotd");
+const { createTeams } = require("./commands/teams");
 const { sendInfo, sendOfficers, deleteMessages } = require("./commands/info");
 const {
   getEventDeadlines,
@@ -90,6 +91,10 @@ client.on("message", async (msg) => {
 
   if (message.startsWith("!event")) {
     if (checkPermissions(msg, "Officers")) addEventDeadlines(client, msg);
+  }
+
+  if (message.startsWith("!team")) {
+    if (checkPermissions(msg, "Officers")) createTeams(client, msg);
   }
 
   //HIDDEN COMMANDS
